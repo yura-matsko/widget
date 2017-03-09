@@ -1,0 +1,442 @@
+// google fonts
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+$leadgen-font-regular: 'Open Sans', sans-serif;
+
+// color vars
+
+$leadgen-tundora: #4a4a4a;
+$leadgen-dusty-gray: #9b9b9b;
+$leadgen-wild-sand: #f5f5f5;
+$leadgen-silver: #cdcdcd;
+$leadgen-orange: #ff5722;
+$leadgen-alabaster: #fcfcfc;
+$leadgen-cod-gray: #1c1c1c;
+$leadgen-orient: #005783;
+$leadgen-white: #fff;
+
+// text color
+$leadgen-regular-color: $leadgen-tundora;
+$leadgen-placeholder-color: $leadgen-dusty-gray;
+$leadgen-input-color: $leadgen-cod-gray;
+$leadgen-icon-color: $leadgen-orange;
+
+// border color
+$leadgen-regular-border: $leadgen-silver;
+$leadgen-focused-border: $leadgen-orient;
+
+// background color
+$leadgen-main-bg: $leadgen-wild-sand;
+$leadgen-icon-bg: $leadgen-alabaster;
+$leadgen-btn-bg: $leadgen-orange;
+
+$leadgen-mobile           : 48em;      // 768px
+$leadgen-tablet           : 62em;      // 992px
+$leadgen-desktop          : 75em;      // 1200px
+
+//mixins
+
+//media query mixin
+
+@mixin leadgen-tablet {
+  @media (max-width: #{$leadgen-mobile}) {
+    @content;
+  }
+}
+
+@mixin leadgen-desktop {
+  @media (max-width: #{$leadgen-tablet}) {
+    @content;
+  }
+}
+
+@mixin leadgen-font {
+  font-family: $leadgen-font-regular;
+  font-size: 12px;
+  line-height: 1.17;
+  font-weight: normal;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder           { @content }
+  &::-moz-placeholder          { @content }
+  &:-ms-input-placeholder      { @content }
+}
+
+// icon fonts
+$icomoon-font-path: "../fonts" !default;
+
+$icon-calendar: "\e900";
+$icon-end: "\e901";
+$icon-mail: "\e902";
+$icon-name: "\e903";
+$icon-phone: "\e904";
+$icon-start: "\e905";
+$icon-route: "\e906";
+$icon-arrow: "\e907";
+$icon-validation: "\e908";
+
+@font-face {
+  font-family: 'icomoon';
+  src:
+          url('#{$icomoon-font-path}/icomoon.ttf?mkr9qg') format('truetype'),
+          url('#{$icomoon-font-path}/icomoon.woff?mkr9qg') format('woff'),
+          url('#{$icomoon-font-path}/icomoon.svg?mkr9qg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="leadgen-icon-"], [class*=" leadgen-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 33px;
+  color: $leadgen-btn-bg;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.leadgen-icon-calendar {
+  &:before {
+    content: $icon-calendar;
+  }
+}
+.leadgen-icon-end {
+  font-size: 31px;
+  &:before {
+    content: $icon-end;
+  }
+}
+.leadgen-icon-mail {
+  &:before {
+    content: $icon-mail;
+  }
+}
+.leadgen-icon-name {
+  &:before {
+    content: $icon-name;
+  }
+}
+.leadgen-icon-phone {
+  &:before {
+    content: $icon-phone;
+  }
+}
+.leadgen-icon-start {
+  &:before {
+    content: $icon-start;
+  }
+}
+.leadgen-icon-route {
+  &:before {
+    content: $icon-route;
+  }
+}
+.leadgen-icon-arrow {
+  &:before {
+    content: $icon-arrow;
+  }
+}
+.leadgen-icon-validation {
+  &:before {
+    content: $icon-validation;
+  }
+}
+
+.leadgen {
+  $path: &;
+
+  color: $leadgen-regular-color;
+
+  @include leadgen-font;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &__container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    background-color: $leadgen-main-bg;
+  }
+
+  &__title {
+    font-family: $leadgen-font-regular;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.21;
+    margin: 0 0 16px;
+    padding: 0;
+    display: block;
+  }
+
+  &__form {
+    $root: &;
+    margin: 0 0 15px;
+    position: static;
+
+    &-container {
+      margin: 0 0 10px;
+      position: relative;
+      border-radius: 2px;
+      border: 1px solid $leadgen-regular-border;
+
+      &--list {
+
+        &:after {
+          content: $icon-route;
+          font-family: 'icomoon' !important;
+          speak: none;
+          font-style: normal;
+          font-weight: normal;
+          font-variant: normal;
+          text-transform: none;
+          font-size: 12px;
+          color: $leadgen-placeholder-color;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+
+          position: absolute;
+          left: 16px;
+          top: 50%;
+          margin: -7px 0 0;
+          opacity: .6;
+        }
+
+        #{$root}-row:first-child {
+
+          #{$root}-input {
+            border-bottom: 1px solid $leadgen-regular-border;
+          }
+        }
+      }
+
+      &--row {
+        border: none;
+        display: flex;
+        justify-content: space-between;
+
+        #{$root}-row {
+          position: relative;
+          border: 1px solid $leadgen-regular-border;
+          border-radius: 2px;
+          width: 50%;
+
+          & + #{$root}-row {
+            width: 48%;
+          }
+        }
+
+        #{$root}-input {
+          width: 100%;
+
+          #{$root}-holder + & {
+            flex: 0 1 calc(100% - 35px);
+          }
+        }
+      }
+    }
+
+    &-row {
+      display: flex;
+    }
+
+    &-holder {
+      background-color: $leadgen-icon-bg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 1 35px;
+    }
+
+    &-focus {
+      display: none;
+    }
+
+    &-input {
+      flex: 0 1 100%;
+      border: 0;
+      padding: 9px 10px;
+      margin: 0;
+      outline: none;
+      position: relative;
+      z-index: 2;
+      color: $leadgen-input-color;
+      background: $leadgen-white;
+      border-radius: 0 2px 2px 0;
+      text-align: left;
+
+      @include leadgen-font;
+      line-height: 18px;
+
+      @include placeholder {
+        font-size: 12px;
+        color: $leadgen-placeholder-color;
+      }
+
+      #{$root}-holder + & {
+        flex: 0 1 calc(100% - 35px);
+      }
+
+      &.is-invalid {
+        background: red;
+      }
+
+      &:focus {
+
+        & ~ #{$root}-focus {
+          position: absolute;
+          left: -1px;
+          right: -1px;
+          bottom: -1px;
+          top: -1px;
+          box-shadow: 0 0 2px 0 $leadgen-placeholder-color;
+          border: 1px solid $leadgen-focused-border;
+          border-radius: 2px;
+          z-index: 1;
+          display: block;
+        }
+      }
+    }
+
+    &-btn {
+      font-family: $leadgen-font-regular;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 600;
+      border-radius: 3px;
+      text-transform: uppercase;
+      color: $leadgen-white;
+      padding: 17px 60px 17px 10px;
+      text-align: center;
+      border: none;
+      background-color: $leadgen-btn-bg;
+      width: 100%;
+      cursor: pointer;
+      outline: none;
+      margin: 0;
+      position: relative;
+      display: block;
+      float: none;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 50px;
+        width: 1px;
+        background-color: #ff916e;
+      }
+
+      &:before {
+        content: $icon-arrow;
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        font-size: 30px;
+        color: $leadgen-white;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &__list {
+    margin: 0 0 15px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-item {
+      margin: 0;
+      padding: 0;
+
+      &:first-child {
+        margin-right: 10%;
+      }
+    }
+  }
+
+  &__trusted {
+    display: flex;
+    align-items: center;
+
+    &-img {
+      margin: 0 10px 0 0;
+    }
+
+    &-info {
+      position: relative;
+    }
+
+    &-stars-holder {
+      height: 13px;
+      position: relative;
+      margin: 0 0 4px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    &-stars {
+      color: $leadgen-white;
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+
+      &--top {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+        color: #f8e81c;
+        overflow: hidden;
+        width: 96%;
+      }
+    }
+
+    &-star {
+      font-style: normal;
+    }
+
+    &-text {
+      display: block;
+      font-weight: 600;
+
+      @include leadgen-font;
+    }
+  }
+
+  &__info {
+    margin: 0;
+    padding: 0;
+    font-family: $leadgen-font-regular;
+    font-size: 8px;
+    line-height: 1.5;
+    font-weight: normal;
+    color: $leadgen-placeholder-color;
+    text-align: center;
+  }
+}

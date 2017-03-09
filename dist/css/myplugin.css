@@ -1,0 +1,449 @@
+/*!
+ * gulp-boilerplate v4.2.3: My Gulp.js boilerplate for creating new web projects
+ * (c) 2017 Chris Ferdinandi
+ * MIT License
+ * http://github.com/cferdinandi/Plugin
+ */
+
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.ttf?mkr9qg") format("truetype"), url("../fonts/icomoon.woff?mkr9qg") format("woff"), url("../fonts/icomoon.svg?mkr9qg#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 90, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+[class^="leadgen-icon-"], [class*=" leadgen-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 33px;
+  color: #ff5722;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 108, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-calendar:before {
+  content: "";
+}
+
+/* line 112, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-end {
+  font-size: 31px;
+}
+
+/* line 114, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-end:before {
+  content: "";
+}
+
+/* line 119, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-mail:before {
+  content: "";
+}
+
+/* line 124, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-name:before {
+  content: "";
+}
+
+/* line 129, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-phone:before {
+  content: "";
+}
+
+/* line 134, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-start:before {
+  content: "";
+}
+
+/* line 139, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-route:before {
+  content: "";
+}
+
+/* line 144, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-arrow:before {
+  content: "";
+}
+
+/* line 149, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-icon-validation:before {
+  content: "";
+}
+
+/* line 154, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen {
+  color: #4a4a4a;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.17;
+  font-weight: normal;
+}
+
+/* line 161, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen * {
+  box-sizing: border-box;
+}
+
+/* line 165, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__container {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  background-color: #f5f5f5;
+}
+
+/* line 172, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__title {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.21;
+  margin: 0 0 16px;
+  padding: 0;
+  display: block;
+}
+
+/* line 182, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form {
+  margin: 0 0 15px;
+  position: static;
+}
+
+/* line 187, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-container {
+  margin: 0 0 10px;
+  position: relative;
+  border-radius: 2px;
+  border: 1px solid #cdcdcd;
+}
+
+/* line 195, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-container--list:after {
+  content: "";
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 12px;
+  color: #9b9b9b;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  margin: -7px 0 0;
+  opacity: .6;
+}
+
+/* line 218, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-container--list .leadgen__form-row:first-child .leadgen__form-input {
+  border-bottom: 1px solid #cdcdcd;
+}
+
+/* line 224, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-container--row {
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 229, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-container--row .leadgen__form-row {
+  position: relative;
+  border: 1px solid #cdcdcd;
+  border-radius: 2px;
+  width: 50%;
+}
+
+/* line 235, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-container--row .leadgen__form-row + .leadgen__form-row {
+  width: 48%;
+}
+
+/* line 240, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-container--row .leadgen__form-input {
+  width: 100%;
+}
+
+/* line 243, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-holder + .leadgen__form-container--row .leadgen__form-input {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 calc(100% - 35px);
+          flex: 0 1 calc(100% - 35px);
+}
+
+/* line 250, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* line 254, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-holder {
+  background-color: #fcfcfc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 35px;
+          flex: 0 1 35px;
+}
+
+/* line 262, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-focus {
+  display: none;
+}
+
+/* line 266, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 100%;
+          flex: 0 1 100%;
+  border: 0;
+  padding: 9px 10px;
+  margin: 0;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  color: #1c1c1c;
+  background: #fff;
+  border-radius: 0 2px 2px 0;
+  text-align: left;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.17;
+  font-weight: normal;
+  line-height: 18px;
+}
+
+/* line 61, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input::-webkit-input-placeholder {
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+/* line 62, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input:-moz-placeholder {
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+/* line 63, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input::-moz-placeholder {
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+/* line 64, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input:-ms-input-placeholder {
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+/* line 287, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-holder + .leadgen__form-input {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 calc(100% - 35px);
+          flex: 0 1 calc(100% - 35px);
+}
+
+/* line 291, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input.is-invalid {
+  background: red;
+}
+
+/* line 297, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input:focus ~ .leadgen__form-focus {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  top: -1px;
+  box-shadow: 0 0 2px 0 #9b9b9b;
+  border: 1px solid #005783;
+  border-radius: 2px;
+  z-index: 1;
+  display: block;
+}
+
+/* line 312, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-btn {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 600;
+  border-radius: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 17px 60px 17px 10px;
+  text-align: center;
+  border: none;
+  background-color: #ff5722;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  position: relative;
+  display: block;
+  float: none;
+}
+
+/* line 332, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-btn:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 50px;
+  width: 1px;
+  background-color: #ff916e;
+}
+
+/* line 342, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-btn:before {
+  content: "";
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 30px;
+  color: #fff;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+/* line 364, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__list {
+  margin: 0 0 15px;
+  padding: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 372, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__list-item {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 376, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__list-item:first-child {
+  margin-right: 10%;
+}
+
+/* line 382, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 386, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted-img {
+  margin: 0 10px 0 0;
+}
+
+/* line 390, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted-info {
+  position: relative;
+}
+
+/* line 394, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted-stars-holder {
+  height: 13px;
+  position: relative;
+  margin: 0 0 4px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* line 402, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted-stars {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+/* line 408, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted-stars--top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  color: #f8e81c;
+  overflow: hidden;
+  width: 96%;
+}
+
+/* line 420, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted-star {
+  font-style: normal;
+}
+
+/* line 424, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__trusted-text {
+  display: block;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.17;
+  font-weight: normal;
+}
+
+/* line 432, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__info {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 8px;
+  line-height: 1.5;
+  font-weight: normal;
+  color: #9b9b9b;
+  text-align: center;
+}

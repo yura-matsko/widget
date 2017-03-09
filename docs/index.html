@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>My Plugin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- stylesheets -->
+   <link rel="stylesheet" href="dist/css/myplugin.css" type="text/css">
+  </head>
+
+  <body><div class="leadgen">
+  <div class="leadgen__container">
+    <strong class="leadgen__title">Please fill your information to get a quote</strong>
+    <form class="leadgen__form js-leadgen-validation" action="#">
+      <div class="leadgen__form-container leadgen__form-container--list">
+        <div class="leadgen__form-row leadgen__form-row">
+          <span class="leadgen__form-holder">
+            <span class="leadgen-icon-start"></span>
+          </span>
+          <input id="mobile-i-address-start" data-validaton="leadgen-input-text" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input' placeholder='Auszugsort'>
+          <i class="leadgen__form-focus"></i>
+        </div>
+        <div class="leadgen__form-row">
+          <span class="leadgen__form-holder">
+            <span class="leadgen-icon-end"></span>
+          </span>
+          <input id="mobile-i-address-destination" data-validaton="leadgen-input-text" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input' placeholder='Einzugsort'>
+          <i class="leadgen__form-focus"></i>
+        </div>
+      </div>
+      <div class="leadgen__form-container">
+        <div id="datepicker" class="leadgen__form-row">
+          <span class="leadgen__form-holder">
+            <span class="leadgen-icon-calendar"></span>
+          </span>
+          <input id="datepicker-value" name="dateMoving" data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input' placeholder='Umzugsdatum'>
+          <i class="leadgen__form-focus"></i>
+        </div>
+      </div>
+      <div class="leadgen__form-container">
+        <div class="leadgen__form-row">
+          <span class="leadgen__form-holder">
+            <span class="leadgen-icon-mail"></span>
+          </span>
+          <input type="email" data-validaton="leadgen-input-email" class='leadgen__form-input js-leadgen-input' placeholder='E-Mail'>
+          <i class="leadgen__form-focus"></i>
+        </div>
+      </div>
+      <div class="leadgen__form-container">
+        <div class="leadgen__form-row">
+          <span class="leadgen__form-holder">
+            <span class="leadgen-icon-phone"></span>
+          </span>
+          <input type="tel" data-validaton="leadgen-input-phone" class='leadgen__form-input js-leadgen-input' placeholder='Telefonnummer'>
+          <i class="leadgen__form-focus"></i>
+        </div>
+      </div>
+      <div class="leadgen__form-container leadgen__form-container--row">
+        <div class="leadgen__form-row">
+          <span class="leadgen__form-holder">
+            <span class="leadgen-icon-name"></span>
+          </span>
+          <input type="text" class='leadgen__form-input js-leadgen-input' data-validaton="leadgen-input-text" placeholder='Vorname'>
+          <i class="leadgen__form-focus"></i>
+        </div>
+        <div class="leadgen__form-row">
+          <input type="text" class='leadgen__form-input js-leadgen-input' data-validaton="leadgen-input-text" placeholder='Nachname'>
+          <i class="leadgen__form-focus"></i>
+        </div>
+      </div>
+      <button type="submit" class="leadgen__form-btn js-leadgen-submit">Angebot berechnen</button>
+    </form>
+    <ul class="leadgen__list">
+      <li class="leadgen__list-item">
+        <div class="leadgen__trusted">
+          <img class="leadgen__trusted-img" src="dist/img/logo-trusted.png" width="35" height="35" alt="trusted">
+          <div class="leadgen__trusted-info">
+            <div class="leadgen__trusted-stars-holder">
+              <div class="leadgen__trusted-stars leadgen__trusted-stars--top">
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+              </div>
+              <div class="leadgen__trusted-stars">
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+                <i class="leadgen__trusted-star">★</i>
+              </div>
+            </div>
+            <span class="leadgen__trusted-text">“Sehr gut” 4.66/5.00</span>
+          </div>
+        </div>
+      </li>
+      <li class="leadgen__list-item">
+        <img src="dist/img/logo-immobilen.png" width="45" height="40" alt="immobilen">
+      </li>
+      <li class="leadgen__list-item">
+        <img src="dist/img/logo-iam.png" width="52" height="25" alt="aim">
+      </li>
+    </ul>
+    <p class="leadgen__info">The information provided above will not be shared with third parties. They will only serve to provide you with a personalized service of quality.</p>
+  </div>
+</div>
+    <!-- Javascript -->
+    <script src="dist/js/myplugin.js"></script>
+    <script>
+      (function () {
+        'use strict';
+
+        let Validation = window.Validation;
+        let validationForm = document.querySelector('.js-leadgen-validation');
+        new Validation(validationForm);
+      })();
+    </script>
+  </body>
+</html>
