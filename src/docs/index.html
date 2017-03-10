@@ -1,29 +1,29 @@
 <div class="leadgen">
   <div class="leadgen__container">
     <strong class="leadgen__title">Please fill your information to get a quote</strong>
-    <form class="leadgen__form js-leadgen-validation" action="#">
+    <form class="leadgen__form js-leadgen-validation" action="https://umzug.movinga.de/plan/entry" method="POST">
       <div class="leadgen__form-container leadgen__form-container--list">
         <div class="leadgen__form-row leadgen__form-row">
           <span class="leadgen__form-holder">
             <span class="leadgen-icon-start"></span>
           </span>
-          <input id="mobile-i-address-start" data-validaton="leadgen-input-text" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input' placeholder='Auszugsort'>
+          <input data-validaton="leadgen-input-text" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input js-leadgen-input-address' placeholder='Auszugsort'>
           <i class="leadgen__form-focus"></i>
         </div>
         <div class="leadgen__form-row">
           <span class="leadgen__form-holder">
             <span class="leadgen-icon-end"></span>
           </span>
-          <input id="mobile-i-address-destination" data-validaton="leadgen-input-text" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input' placeholder='Einzugsort'>
+          <input data-validaton="leadgen-input-text" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input js-leadgen-input-address' placeholder='Einzugsort'>
           <i class="leadgen__form-focus"></i>
         </div>
       </div>
       <div class="leadgen__form-container">
-        <div id="datepicker" class="leadgen__form-row">
+        <div class="leadgen__form-row">
           <span class="leadgen__form-holder">
             <span class="leadgen-icon-calendar"></span>
           </span>
-          <input id="datepicker-value" name="dateMoving" data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input' placeholder='Umzugsdatum'>
+          <input id="js-leadgen-datepicker" name="dateMoving" data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input js-leadgen-input' placeholder='Umzugsdatum'>
           <i class="leadgen__form-focus"></i>
         </div>
       </div>

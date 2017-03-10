@@ -272,12 +272,7 @@
           flex: 0 1 calc(100% - 35px);
 }
 
-/* line 291, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
-.leadgen__form-input.is-invalid {
-  background: red;
-}
-
-/* line 297, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 293, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input:focus ~ .leadgen__form-focus {
   position: absolute;
   left: -1px;
@@ -291,7 +286,21 @@
   display: block;
 }
 
-/* line 312, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 309, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input.is-invalid ~ .leadgen__form-focus {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  top: -1px;
+  box-shadow: 0 0 2px 0 #ff5722;
+  border: 1px solid #ff5722;
+  border-radius: 2px;
+  z-index: 1;
+  display: block;
+}
+
+/* line 324, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-btn {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
@@ -313,7 +322,7 @@
   float: none;
 }
 
-/* line 332, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 344, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-btn:after {
   content: '';
   position: absolute;
@@ -324,7 +333,7 @@
   background-color: #ff916e;
 }
 
-/* line 342, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 354, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-btn:before {
   content: "";
   font-family: 'icomoon' !important;
@@ -345,7 +354,7 @@
           transform: translateY(-50%);
 }
 
-/* line 364, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 376, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__list {
   margin: 0 0 15px;
   padding: 0;
@@ -361,18 +370,18 @@
           align-items: center;
 }
 
-/* line 372, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 384, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__list-item {
   margin: 0;
   padding: 0;
 }
 
-/* line 376, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 388, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__list-item:first-child {
   margin-right: 10%;
 }
 
-/* line 382, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 394, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -382,17 +391,17 @@
           align-items: center;
 }
 
-/* line 386, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 398, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-img {
   margin: 0 10px 0 0;
 }
 
-/* line 390, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 402, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-info {
   position: relative;
 }
 
-/* line 394, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 406, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-stars-holder {
   height: 13px;
   position: relative;
@@ -401,7 +410,7 @@
   vertical-align: top;
 }
 
-/* line 402, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 414, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-stars {
   color: #fff;
   position: relative;
@@ -409,7 +418,7 @@
   white-space: nowrap;
 }
 
-/* line 408, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 420, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-stars--top {
   position: absolute;
   left: 0;
@@ -421,12 +430,12 @@
   width: 96%;
 }
 
-/* line 420, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 432, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-star {
   font-style: normal;
 }
 
-/* line 424, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 436, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-text {
   display: block;
   font-weight: 600;
@@ -436,7 +445,7 @@
   font-weight: normal;
 }
 
-/* line 432, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 444, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__info {
   margin: 0;
   padding: 0;
@@ -446,4 +455,252 @@
   font-weight: normal;
   color: #9b9b9b;
   text-align: center;
+}
+
+/*!
+ * Pikaday
+ * Copyright © 2014 David Bushell | BSD & MIT license | http://dbushell.com/
+ */
+/* line 491, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-single {
+  z-index: 9999;
+  display: block;
+  position: relative;
+  color: #333;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 501, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-single.is-hidden {
+  display: none;
+}
+
+/* line 505, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-single.is-bound {
+  position: absolute;
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* line 513, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-single {
+  *zoom: 1;
+}
+
+/* line 516, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-single:before, .pika-single:after {
+  content: " ";
+  display: table;
+}
+
+/* line 522, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-single:after {
+  clear: both;
+}
+
+/* line 525, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-lendar {
+  float: left;
+  width: 240px;
+  margin: 8px;
+}
+
+/* line 531, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-title {
+  position: relative;
+  text-align: center;
+}
+
+/* line 535, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-title select {
+  cursor: pointer;
+  position: absolute;
+  z-index: 9998;
+  margin: 0;
+  left: 0;
+  top: 5px;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+/* line 547, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-label {
+  display: inline-block;
+  *display: inline;
+  position: relative;
+  z-index: 9999;
+  overflow: hidden;
+  margin: 0;
+  padding: 5px 3px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
+}
+
+/* line 562, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-prev,
+.pika-next {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  border: 0;
+  padding: 0;
+  width: 20px;
+  height: 30px;
+  text-indent: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 75% 75%;
+  opacity: .5;
+  *position: absolute;
+  *top: 0;
+}
+
+/* line 583, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-prev:hover,
+.pika-next:hover {
+  opacity: 1;
+}
+
+/* line 587, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-prev.is-disabled,
+.pika-next.is-disabled {
+  cursor: default;
+  opacity: .2;
+}
+
+/* line 593, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-prev,
+.is-rtl .pika-next {
+  float: left;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAUklEQVR42u3VMQoAIBADQf8Pgj+OD9hG2CtONJB2ymQkKe0HbwAP0xucDiQWARITIDEBEnMgMQ8S8+AqBIl6kKgHiXqQqAeJepBo/z38J/U0uAHlaBkBl9I4GwAAAABJRU5ErkJggg==");
+  *left: 0;
+}
+
+/* line 600, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-next,
+.is-rtl .pika-prev {
+  float: right;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAU0lEQVR42u3VOwoAMAgE0dwfAnNjU26bYkBCFGwfiL9VVWoO+BJ4Gf3gtsEKKoFBNTCoCAYVwaAiGNQGMUHMkjGbgjk2mIONuXo0nC8XnCf1JXgArVIZAQh5TKYAAAAASUVORK5CYII=");
+  *right: 0;
+}
+
+/* line 607, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-select {
+  display: inline-block;
+  *display: inline;
+}
+
+/* line 612, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 0;
+}
+
+/* line 618, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-table th,
+.pika-table td {
+  width: 14.285714285714286%;
+  padding: 0;
+}
+
+/* line 624, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-table th {
+  color: #999;
+  font-size: 12px;
+  line-height: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* line 632, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-table abbr {
+  border-bottom: none;
+  cursor: help;
+}
+
+/* line 638, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-button {
+  cursor: pointer;
+  display: block;
+  box-sizing: border-box;
+  outline: none;
+  border: 0;
+  margin: 0;
+  width: 100%;
+  padding: 5px;
+  color: #666;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: right;
+  background: #f5f5f5;
+}
+
+/* line 654, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.is-today .pika-button {
+  color: #33aaff;
+  font-weight: bold;
+}
+
+/* line 659, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.is-selected .pika-button {
+  color: #fff;
+  font-weight: bold;
+  background: #33aaff;
+  box-shadow: inset 0 1px 3px #178fe5;
+  border-radius: 3px;
+}
+
+/* line 667, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.is-disabled .pika-button,
+.is-outside-current-month .pika-button {
+  pointer-events: none;
+  cursor: default;
+  color: #999;
+  opacity: .3;
+}
+
+/* line 675, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-button:hover {
+  color: #fff;
+  background: #ff8000;
+  box-shadow: none;
+  border-radius: 3px;
+}
+
+/* line 683, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.pika-week {
+  font-size: 11px;
+  color: #999;
+}
+
+/* line 688, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.is-inrange .pika-button {
+  background: #D5E9F7;
+}
+
+/* line 692, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.is-startrange .pika-button {
+  color: #fff;
+  background: #6CB31D;
+  box-shadow: none;
+  border-radius: 3px;
+}
+
+/* line 699, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.is-endrange .pika-button {
+  color: #fff;
+  background: #33aaff;
+  box-shadow: none;
+  border-radius: 3px;
 }
