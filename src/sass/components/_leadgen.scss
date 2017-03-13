@@ -30,6 +30,12 @@ $leadgen-main-bg: $leadgen-wild-sand;
 $leadgen-icon-bg: $leadgen-alabaster;
 $leadgen-btn-bg: $leadgen-orange;
 
+//datepicker styles
+$leadgen-date-grey: #f5f5f5;
+$leadgen-date-text: #656568;
+$leadgen-date-border: #cdcdcd;
+$leadgen-date-active: #656565;
+
 $leadgen-mobile           : 48em;      // 768px
 $leadgen-tablet           : 62em;      // 992px
 $leadgen-desktop          : 75em;      // 1200px
@@ -319,6 +325,12 @@ $icon-validation: "\e908";
           display: block;
         }
       }
+
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px $leadgen-white inset;
+      }
     }
 
     &-btn {
@@ -387,6 +399,10 @@ $icon-validation: "\e908";
 
       &:first-child {
         margin-right: 10%;
+
+        @include leadgen-tablet {
+          margin: 0;
+        }
       }
     }
   }
@@ -703,4 +719,105 @@ $pd-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
   border-radius: 3px;
 }
 
+.leadgen-theme {
+  background: $leadgen-date-grey;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  color: $leadgen-date-text;
+  margin: -36px 0 0;
+  z-index: 999;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .pika-lendar {
+    padding: 10px 15px 15px;
+    width: 240px;
+    margin: 0;
+  }
+
+  .pika-label {
+    font-size: 14px;
+    line-height: 1.357;
+    font-weight: 600;
+    padding: 8px 3px 6px;
+    background: none;
+  }
+
+  .pika-table {
+
+    abbr {
+      font-size: 13px;
+      line-height: 1.357;
+      display: block;
+      padding: 5px 0;
+      font-weight: normal;
+      text-transform: uppercase;
+      color: #000;
+    }
+  }
+
+  .pika-select {
+    height: auto;
+  }
+
+  .pika-button {
+    font-size: 13px;
+    line-height: 1.357;
+    color: $leadgen-date-text;
+    background: $leadgen-date-grey;
+    padding: 6px 0;
+    text-align: center;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .is-today {
+
+    .pika-button {
+      background: $leadgen-date-border;
+      color: $leadgen-date-active !important;
+      font-weight: 700;
+    }
+  }
+
+  .is-selected {
+
+    .pika-button {
+      background: $leadgen-orient;
+      color: $leadgen-white !important;
+      font-weight: 700;
+    }
+  }
+
+  .pika-prev,
+  .pika-next {
+    width: auto;
+    height: auto;
+    margin: 0 -5px;
+    font-size: 0;
+    line-height: 0;
+    background: none;
+
+    &:before {
+      content: $icon-arrow;
+      font-family: 'icomoon' !important;
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      font-size: 33px;
+      color: $leadgen-tundora;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
+  .pika-prev {
+    transform: rotate(180deg);
+  }
+}
 

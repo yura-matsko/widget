@@ -14,7 +14,7 @@
   font-style: normal;
 }
 
-/* line 90, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 96, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 [class^="leadgen-icon-"], [class*=" leadgen-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
@@ -31,57 +31,57 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* line 108, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 114, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-calendar:before {
   content: "";
 }
 
-/* line 112, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 118, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-end {
   font-size: 31px;
 }
 
-/* line 114, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 120, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-end:before {
   content: "";
 }
 
-/* line 119, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 125, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-mail:before {
   content: "";
 }
 
-/* line 124, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 130, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-name:before {
   content: "";
 }
 
-/* line 129, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 135, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-phone:before {
   content: "";
 }
 
-/* line 134, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 140, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-start:before {
   content: "";
 }
 
-/* line 139, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 145, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-route:before {
   content: "";
 }
 
-/* line 144, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 150, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-arrow:before {
   content: "";
 }
 
-/* line 149, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 155, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen-icon-validation:before {
   content: "";
 }
 
-/* line 154, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 160, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen {
   color: #4a4a4a;
   font-family: "Open Sans", sans-serif;
@@ -90,12 +90,12 @@
   font-weight: normal;
 }
 
-/* line 161, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 167, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen * {
   box-sizing: border-box;
 }
 
-/* line 165, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 171, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__container {
   max-width: 750px;
   margin: 0 auto;
@@ -103,7 +103,7 @@
   background-color: #f5f5f5;
 }
 
-/* line 172, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 178, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__title {
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
@@ -114,13 +114,13 @@
   display: block;
 }
 
-/* line 182, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 188, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form {
   margin: 0 0 15px;
   position: static;
 }
 
-/* line 187, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 193, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-container {
   margin: 0 0 10px;
   position: relative;
@@ -128,7 +128,7 @@
   border: 1px solid #cdcdcd;
 }
 
-/* line 195, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 201, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-container--list:after {
   content: "";
   font-family: 'icomoon' !important;
@@ -149,12 +149,12 @@
   opacity: .6;
 }
 
-/* line 218, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 224, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-container--list .leadgen__form-row:first-child .leadgen__form-input {
   border-bottom: 1px solid #cdcdcd;
 }
 
-/* line 224, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 230, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-container--row {
   border: none;
   display: -webkit-box;
@@ -165,7 +165,7 @@
           justify-content: space-between;
 }
 
-/* line 229, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 235, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-container--row .leadgen__form-row {
   position: relative;
   border: 1px solid #cdcdcd;
@@ -173,31 +173,31 @@
   width: 50%;
 }
 
-/* line 235, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 241, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-container--row .leadgen__form-row + .leadgen__form-row {
   width: 48%;
 }
 
-/* line 240, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 246, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-container--row .leadgen__form-input {
   width: 100%;
 }
 
-/* line 243, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 249, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-holder + .leadgen__form-container--row .leadgen__form-input {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 calc(100% - 35px);
           flex: 0 1 calc(100% - 35px);
 }
 
-/* line 250, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 256, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-/* line 254, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 260, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-holder {
   background-color: #fcfcfc;
   display: -webkit-box;
@@ -214,12 +214,12 @@
           flex: 0 1 35px;
 }
 
-/* line 262, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 268, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-focus {
   display: none;
 }
 
-/* line 266, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 272, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 100%;
@@ -241,38 +241,38 @@
   line-height: 18px;
 }
 
-/* line 61, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 67, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input::-webkit-input-placeholder {
   font-size: 12px;
   color: #9b9b9b;
 }
 
-/* line 62, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 68, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input:-moz-placeholder {
   font-size: 12px;
   color: #9b9b9b;
 }
 
-/* line 63, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 69, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input::-moz-placeholder {
   font-size: 12px;
   color: #9b9b9b;
 }
 
-/* line 64, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 70, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input:-ms-input-placeholder {
   font-size: 12px;
   color: #9b9b9b;
 }
 
-/* line 287, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 293, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-holder + .leadgen__form-input {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 calc(100% - 35px);
           flex: 0 1 calc(100% - 35px);
 }
 
-/* line 293, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 299, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input:focus ~ .leadgen__form-focus {
   position: absolute;
   left: -1px;
@@ -286,7 +286,7 @@
   display: block;
 }
 
-/* line 309, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 315, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-input.is-invalid ~ .leadgen__form-focus {
   position: absolute;
   left: -1px;
@@ -300,7 +300,12 @@
   display: block;
 }
 
-/* line 324, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 329, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen__form-input:-webkit-autofill:hover, .leadgen__form-input:-webkit-autofill:focus, .leadgen__form-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}
+
+/* line 336, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-btn {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
@@ -322,7 +327,7 @@
   float: none;
 }
 
-/* line 344, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 356, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-btn:after {
   content: '';
   position: absolute;
@@ -333,7 +338,7 @@
   background-color: #ff916e;
 }
 
-/* line 354, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 366, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__form-btn:before {
   content: "";
   font-family: 'icomoon' !important;
@@ -354,7 +359,7 @@
           transform: translateY(-50%);
 }
 
-/* line 376, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 388, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__list {
   margin: 0 0 15px;
   padding: 0;
@@ -370,18 +375,25 @@
           align-items: center;
 }
 
-/* line 384, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 396, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__list-item {
   margin: 0;
   padding: 0;
 }
 
-/* line 388, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 400, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__list-item:first-child {
   margin-right: 10%;
 }
 
-/* line 394, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+@media (max-width: 48em) {
+  /* line 400, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+  .leadgen__list-item:first-child {
+    margin: 0;
+  }
+}
+
+/* line 410, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -391,17 +403,17 @@
           align-items: center;
 }
 
-/* line 398, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 414, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-img {
   margin: 0 10px 0 0;
 }
 
-/* line 402, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 418, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-info {
   position: relative;
 }
 
-/* line 406, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 422, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-stars-holder {
   height: 13px;
   position: relative;
@@ -410,7 +422,7 @@
   vertical-align: top;
 }
 
-/* line 414, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 430, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-stars {
   color: #fff;
   position: relative;
@@ -418,7 +430,7 @@
   white-space: nowrap;
 }
 
-/* line 420, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 436, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-stars--top {
   position: absolute;
   left: 0;
@@ -430,12 +442,12 @@
   width: 96%;
 }
 
-/* line 432, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 448, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-star {
   font-style: normal;
 }
 
-/* line 436, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 452, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__trusted-text {
   display: block;
   font-weight: 600;
@@ -445,7 +457,7 @@
   font-weight: normal;
 }
 
-/* line 444, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 460, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .leadgen__info {
   margin: 0;
   padding: 0;
@@ -461,7 +473,7 @@
  * Pikaday
  * Copyright © 2014 David Bushell | BSD & MIT license | http://dbushell.com/
  */
-/* line 491, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 507, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-single {
   z-index: 9999;
   display: block;
@@ -473,47 +485,47 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* line 501, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 517, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-single.is-hidden {
   display: none;
 }
 
-/* line 505, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 521, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-single.is-bound {
   position: absolute;
   box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
 }
 
-/* line 513, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 529, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-single {
   *zoom: 1;
 }
 
-/* line 516, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 532, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-single:before, .pika-single:after {
   content: " ";
   display: table;
 }
 
-/* line 522, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 538, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-single:after {
   clear: both;
 }
 
-/* line 525, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 541, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-lendar {
   float: left;
   width: 240px;
   margin: 8px;
 }
 
-/* line 531, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 547, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-title {
   position: relative;
   text-align: center;
 }
 
-/* line 535, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 551, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-title select {
   cursor: pointer;
   position: absolute;
@@ -525,7 +537,7 @@
   opacity: 0;
 }
 
-/* line 547, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 563, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-label {
   display: inline-block;
   *display: inline;
@@ -541,7 +553,7 @@
   background-color: #fff;
 }
 
-/* line 562, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 578, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-prev,
 .pika-next {
   display: block;
@@ -564,20 +576,20 @@
   *top: 0;
 }
 
-/* line 583, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 599, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-prev:hover,
 .pika-next:hover {
   opacity: 1;
 }
 
-/* line 587, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 603, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-prev.is-disabled,
 .pika-next.is-disabled {
   cursor: default;
   opacity: .2;
 }
 
-/* line 593, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 609, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-prev,
 .is-rtl .pika-next {
   float: left;
@@ -585,7 +597,7 @@
   *left: 0;
 }
 
-/* line 600, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 616, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-next,
 .is-rtl .pika-prev {
   float: right;
@@ -593,13 +605,13 @@
   *right: 0;
 }
 
-/* line 607, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 623, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-select {
   display: inline-block;
   *display: inline;
 }
 
-/* line 612, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 628, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-table {
   width: 100%;
   border-collapse: collapse;
@@ -607,14 +619,14 @@
   border: 0;
 }
 
-/* line 618, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 634, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-table th,
 .pika-table td {
   width: 14.285714285714286%;
   padding: 0;
 }
 
-/* line 624, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 640, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-table th {
   color: #999;
   font-size: 12px;
@@ -623,13 +635,13 @@
   text-align: center;
 }
 
-/* line 632, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 648, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-table abbr {
   border-bottom: none;
   cursor: help;
 }
 
-/* line 638, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 654, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-button {
   cursor: pointer;
   display: block;
@@ -646,13 +658,13 @@
   background: #f5f5f5;
 }
 
-/* line 654, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 670, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .is-today .pika-button {
   color: #33aaff;
   font-weight: bold;
 }
 
-/* line 659, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 675, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .is-selected .pika-button {
   color: #fff;
   font-weight: bold;
@@ -661,7 +673,7 @@
   border-radius: 3px;
 }
 
-/* line 667, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 683, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .is-disabled .pika-button,
 .is-outside-current-month .pika-button {
   pointer-events: none;
@@ -670,7 +682,7 @@
   opacity: .3;
 }
 
-/* line 675, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 691, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-button:hover {
   color: #fff;
   background: #ff8000;
@@ -678,18 +690,18 @@
   border-radius: 3px;
 }
 
-/* line 683, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 699, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .pika-week {
   font-size: 11px;
   color: #999;
 }
 
-/* line 688, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 704, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .is-inrange .pika-button {
   background: #D5E9F7;
 }
 
-/* line 692, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 708, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .is-startrange .pika-button {
   color: #fff;
   background: #6CB31D;
@@ -697,10 +709,117 @@
   border-radius: 3px;
 }
 
-/* line 699, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+/* line 715, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
 .is-endrange .pika-button {
   color: #fff;
   background: #33aaff;
   box-shadow: none;
   border-radius: 3px;
+}
+
+/* line 722, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme {
+  background: #f5f5f5;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  color: #656568;
+  margin: -36px 0 0;
+  z-index: 999;
+  box-sizing: border-box;
+}
+
+/* line 730, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme * {
+  box-sizing: border-box;
+}
+
+/* line 734, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-lendar {
+  padding: 10px 15px 15px;
+  width: 240px;
+  margin: 0;
+}
+
+/* line 740, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-label {
+  font-size: 14px;
+  line-height: 1.357;
+  font-weight: 600;
+  padding: 8px 3px 6px;
+  background: none;
+}
+
+/* line 750, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-table abbr {
+  font-size: 13px;
+  line-height: 1.357;
+  display: block;
+  padding: 5px 0;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: #000;
+}
+
+/* line 761, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-select {
+  height: auto;
+}
+
+/* line 765, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-button {
+  font-size: 13px;
+  line-height: 1.357;
+  color: #656568;
+  background: #f5f5f5;
+  padding: 6px 0;
+  text-align: center;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* line 778, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .is-today .pika-button {
+  background: #cdcdcd;
+  color: #656565 !important;
+  font-weight: 700;
+}
+
+/* line 787, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .is-selected .pika-button {
+  background: #005783;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+/* line 794, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-prev,
+.leadgen-theme .pika-next {
+  width: auto;
+  height: auto;
+  margin: 0 -5px;
+  font-size: 0;
+  line-height: 0;
+  background: none;
+}
+
+/* line 803, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-prev:before,
+.leadgen-theme .pika-next:before {
+  content: "";
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 33px;
+  color: #4a4a4a;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 819, /Users/yuriimatsko/Projects/leadgen/src/sass/components/_leadgen.scss */
+.leadgen-theme .pika-prev {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }

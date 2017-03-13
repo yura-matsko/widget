@@ -14,32 +14,21 @@
 
     constructor(el) {
       this.el = el;
-      this.input = [...this.el.querySelectorAll('.js-leadgen-input')];
+      this.input = [...this.el.querySelectorAll('[data-validaton]')];
       this.submitBtn = this.el.querySelector('.js-leadgen-submit');
       this.textInput = 'leadgen-input-text';
       this.emailInput = 'leadgen-input-email';
       this.phoneInput = 'leadgen-input-phone';
       this.dateInput = 'leadgen-input-date';
-      this.validArr = [];
+      this.addressInput = 'leadgen-input-address';
+      this.data = {};
 
       this.registerEvents();
-
     }
 
     makeValid(el) {
       el.classList.remove('is-invalid');
       el.classList.add('is-valid');
-
-      this.validArr.push(el);
-
-      let uniqueArray = this.validArr.filter(function(item, pos, self) {
-        return self.indexOf(item) == pos;
-      });
-
-      if (uniqueArray.length === this.input.length) {
-        alert('AJAX');
-      }
-
 
       return true;
     }
@@ -51,8 +40,9 @@
       return false;
     }
 
-    checkValidity(e) {
-      let showValidationIcons = true;
+    checkValidity(showValidationIcons = true) {
+
+      let validArr = [];
 
       this.input.forEach(el => {
 
@@ -61,10 +51,16 @@
           return showValidationIcons ? this.makeValid(el) : true;
         }
 
+        // Empty inputs are always invalid
+        if (el.value.trim().length === 0) {
+          return showValidationIcons ? this.makeInvalid(el) : false;
+        }
+
         // Test email address inputs
         if (el.dataset.validaton === this.emailInput) {
 
           if (Validation.EMAIL_REGEXP.test(el.value)) {
+            validArr.push(el);
             return this.makeValid(el);
           }
 
@@ -75,6 +71,7 @@
         if (el.dataset.validaton === this.textInput) {
 
           if (Validation.NAME_REGEXP.test(el.value)) {
+            validArr.push(el);
             return this.makeValid(el);
           }
 
@@ -85,6 +82,7 @@
         if (el.dataset.validaton === this.phoneInput) {
 
           if (Validation.NUM_REGEXP.test(el.value)) {
+            validArr.push(el);
             return this.makeValid(el);
           }
 
@@ -95,32 +93,68 @@
         if (el.dataset.validaton === this.dateInput) {
 
           if (Validation.DATE_REGEXP.test(el.value)) {
+            validArr.push(el);
             return this.makeValid(el);
           }
 
           return showValidationIcons ? this.makeInvalid(el) : false;
         }
 
-        // Empty inputs are always invalid
-        if (el.value.trim().length === 0) {
+        // Address inputs
+        if (el.dataset.validaton === this.addressInput) {
+
+          if (el.value.trim().length != 0) {
+            validArr.push(el);
+            return this.makeValid(el);
+          }
+
           return showValidationIcons ? this.makeInvalid(el) : false;
         }
 
         return this.makeValid(el);
-      })
+      });
+
+      this.prepareData(validArr);
+      return validArr;
+    }
+
+    prepareData(val) {
+      val.forEach(el => this.data[`${el.name}`] = el.value);
+    }
+
+    formPost() {
+
+      for(let key in this.data) {
+        if(this.data.hasOwnProperty(key)) {
+          let hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", this.data[key]);
+
+          this.el.appendChild(hiddenField);
+        }
+      }
+    }
+
+    formSubmit(e) {
+      this.checkValidity();
+
+      if (this.checkValidity().length === this.input.length) {
+        this.formPost();
+      }
 
       e.preventDefault();
     }
 
     registerEvents() {
-      this.submitBtn.addEventListener('click', this.checkValidity.bind(this), false);
+      this.submitBtn.addEventListener('click', this.formSubmit.bind(this), false);
     }
   }
 
   Validation.NAME_REGEXP  = /^[ äÄäÖöÜüßÀÂÄÈÉÊËÎÏÔŒÙÛÜŸàâäèéêëîïôœùûüÿÇçÀÈÉÌÒÓÙàèéìòóù\-'\w]+$/;
   Validation.EMAIL_REGEXP = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
   Validation.DATE_REGEXP  = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
-  Validation.NUM_REGEXP   = /^\d+$/;
+  Validation.NUM_REGEXP   = /^\s*\+?[\d\s()-]*$/;
 
   // export
   window.Validation = Validation;
@@ -1890,7 +1924,7 @@
 
 
 function initMap() {
-  let input = [...document.querySelectorAll('.js-leadgen-input-address')];
+  let input = [...document.querySelectorAll('[data-address]')];
   let options = {
     componentRestrictions: {country: 'de'}
   };
