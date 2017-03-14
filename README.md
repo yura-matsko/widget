@@ -1,234 +1,130 @@
-# Gulp Boilerplate [![Build Status](https://travis-ci.org/cferdinandi/gulp-boilerplate.svg)](https://travis-ci.org/cferdinandi/gulp-boilerplate)
+Front End Gulp Boilerplate
+==========================
 
-My boilerplate for creating new web projects with [Gulp.js](http://gulpjs.com/). Forked from [Todd Motto's GulpOSS](https://github.com/toddmotto/gulp-oss) with some additions from [Mark Goodyear and Big Bite Creative](https://github.com/bigbitecreative/base) and various tutorials around the web.
+Front-end boilerplate for Gulp with everything you need to get started.
 
-* Lints and concatenates JS files.
-* Compiles Sass files and automatically [adds vendor prefixes](https://github.com/ai/autoprefixer).
-* Exports both minified and expanded JS and CSS files with header info.
-* Generates SVG sprites.
-* Generates documentation.
-* Cleans up file directories.
-* Runs Jasmine unit tests and generates reports.
-* Includes a `.travis.yml` file for continuous integration with [TravisCI](https://travis-ci.org).
+* First download or clone this repo :)
+* Then run `npm install` to install dev dependencies. Use sudo if needed.
 
-[Download Gulp Boilerplate](https://github.com/cferdinandi/gulp-boilerplate/archive/master.zip)
+You'll need to have Gulp installed. If you already have Gulp installed, you can skip the following line. It is as simple as running:
+* `npm install -g gulp`
 
-**In This Documentation**
+During development mode, run the default task so you'll have watchers and browser sync. Simply do the following:
+* Run `gulp` to start it up
+* Try to modify html, scss and javascript files and see how the page gets updated with BrowserSync
 
-1. [Getting Started](#getting-started)
-2. [File Structure](#file-structure)
-3. [Working with the Source Files](#working-with-the-source-files)
-4. [Options & Settings](#options-and-settings)
-5. [Continuous Integration](#continuous-integration)
-6. [License](#license)
+When you're ready to deploy, simply do the following:
+* Run `gulp deploy`
+* All of the files you need will be in /dist with your images optimized, css compressed and js compressed
 
-## Getting Started
+## Node Versions Supported
+The following Node versions have been tested
+* 4.x
+* 6.x
 
-### Dependencies
-Make sure these are installed first.
+Version
+==========================
+1.4.0
 
-* [Node.js](http://nodejs.org)
-* [Gulp](http://gulpjs.com) `sudo npm install -g gulp`
+News
+==========================
+Version 2.0 is currently under development! It'll be a big release and will include some pretty cool and easy features. It'll make using and customizing Harvest a breeze. A peak on what's to come:
+* Generator-based so it's simple to configure how you want
+* Modular tasks makes it easy to tweak it without digging through everything
+* More options! Including LESS, SCSS, Stylus, ES2015, Browserify, and many more options that will be supported out of the box
+* More suprises :)
 
-### Quick Start
+The current phases of work is being maintained on thos KANBAN: https://tree.taiga.io/project/ryanbenson-harvest-20/kanban so if you want to see how things are proressing you can see what's going on. If you have any ideas or thoughts let me know, as now is the time.
 
-1. In bash/terminal/command line, `cd` into your project directory.
-2. Run `npm install` to install required files.
-3. When it's done installing, run one of the task runners to get going:
-	* `gulp` manually compiles files and runs unit tests.
-	* `gulp watch` automatically compiles files, runs unit tests, and applies changes using [LiveReload](http://livereload.com/).
-	* `gulp test` compiles files and runs unit tests.
+Thanks for everyone's support and appreciation for this project!
 
+More Information
+==========================
+Check out the website http://www.ryanbensonmedia.com/harvest for more information.
 
+Revision History
+==========================
+February 6, 2016
+* Merged in pull request from @rennan that updates dependencies
 
-## File Structure
+June 24, 2015
+* Fixed missing images folder in app when I removed placeholder
 
-Add your files to the appropriate `src` subdirectories. Gulp will process and and compile them into `dist`.
+May 8, 2015
+* Fixed install instructions on README
+* Minor revisions to README
 
-* Content in subdirectories under the `js` folder will be concatenated. For example, files in `js/detects` will compile into `detects.js`. Files directly under `js` will compile individually.
-* Files in the `img` directory will be copied as-is into the `dist/img` directory.
-* SVG files placed in the `src/svg` directory will be optimized and compiled into the `dist/svg` directory. SVG files placed in a subdirectory of `src/svg` will be compiled into a single SVG sprite named after the subdirectory.
+April 15, 2015
+* Merged PR from @telephant00
+* Adds SCSS Source Maps
 
-```
-gulp-boilerplate/
-|—— dist/
-|   |—— css/
-|   |   |—— myplugin.css
-|   |   |—— myplugin.min.css
-|   |—— img/
-|   |   |—— # image files
-|   |—— js/
-|   |   |—— classList.js
-|   |   |—— classList.min.js
-|   |   |—— myplugin.js
-|   |   |—— myplugin.min.js
-|   |—— svg/
-|   |   |—— icons.svg
-|   |—— # static assets
-|—— docs/
-|   |—— assets/
-|   |—— dist/
-|   |—— index.html
-|   |—— # other docs
-|—— src/
-|   |—— docs/
-|   |   |—— _templates/
-|   |   |   |—— _header.html
-|   |   |   |—— _footer.html
-|   |   |—— assets/
-|   |   |   |—— # doc-specific assets
-|   |   |—— index.html
-|   |   |—— # other docs
-|   |—— img/
-|   |   |—— # image files
-|   |—— js/
-|   |   |—— classList.js
-|   |   |—— myplugin.js
-|   |—— sass/
-|   |   |—— _config.scss
-|   |   |—— _mixins.scss
-|   |   |—— components/
-|   |   |   |—— myplugin.scss
-|   |—— img/
-|   |   |—— # static files and folders
-|   |—— svg/
-|   |   |—— # svgs
-|—— test/
-|   |—— coverage/
-|   |   |—— various files
-|   |—— results/
-|   |   |—— unit-tests.html
-|   |—— spec/
-|   |   |—— spec-myplugin.js
-|—— .travis.yml
-|—— gulfile.js
-|—— package.json
-|—— README.md
-|—— README-TEMPLATE.md
-```
+April 13, 2015
+* Merged PR from @telephant00
+* Fixed image dev task, it wasn't pushing images to a dest
+* Removed README from images folder, causing segfault errors
 
+April 9, 2015
+* Removed LiveReload in favor of BrowserSync
 
+March 6, 2015
+* Removed del lib, it was causing issues with deployments
+* Added sequence and shell libraries
+* Moved deployment task to use sequence
+* Using CLI to remove and setup dist folders on deployment, resolved bugs
 
-## Working with the Source Files
+February 11, 2015
+* Updated npm dependency versions
+* Updated to latest HTML5 Boilerplate (slightly modified)
+* Updated CSS and JS vendors
+* Removed a couple unused modules
+* Started using version numbers and git flow
 
-### Sass
+January 16, 2014
+* Merge pull request from @quakenul fixing concat order issue with JS
 
-Sass files are located in `src` > `sass`. Gulp generates minified and unminified CSS files. It also includes [autoprefixer](https://github.com/postcss/autoprefixer), which adds vendor prefixes for you if required by the last two versions of a browser.
+November 20, 2014
+* Added auto-prefixer support
 
-### JavaScript
+October 17, 2014
+* Removed recently deprecated `gulp-clean` module
+* Using `del` module instead
+* Updated gulpfile to use del method to cleanse the dist folder prior to the deployment task
 
-JavaScript files are located in the `src` > `js` directory.
+September 25, 2014
+* Merged pull request form @hhff
+  * Improved gitignore for sass cache
+  * Improved font-face mixing
+  * Updated images and fonts gulp task for nested files
 
-Files placed directly in the js folder will compile directly to `dist` > `js` as both minified and unminified files. Files placed in subdirectories will also be concatenated into a single file. For example, files in `js/detects` will compile into `detects.js`. Files directly under `js` will compile individually.
+August 14, 2014:
+* Finally figured out how to get all of the dependencies into dev, not production
 
-#### Unit Testing
+June 20, 2014:
+* Updated dependencies
+* Completely changed how webserver and livereload works
+* Refactored a lot of the build task, it is much more modular and flexible
+* Added some extra boilerplate
+* Removed a lot of the footprint styles, including the entire Skeleton framework
+* Fixed SASS crashing on syntax/coding error
+* Using default port number now (8080) for web server
 
-Gulp Boilerplate is set up for unit testing with [Jasmine](http://jasmine.github.io/2.0/introduction.html). Add your tests to `test/spec/spec-myplugin.js`. Adjust filenames and references as needed.
+February 03, 2014:
+* Added caching of images so the deploy feature won't compress the same images multiple times
+* Added cleaning of the `dist` folder in case things got deleted at some point
+* Made the dev & dist scripts and css compressed file in the same place so no edits to the href/src needs to be done anymore
+* Added graceful errors during watch, so SCSS or JS errors no longe break the `watch`
+* Updated `gulpfile.js` since gulp.run() is deprecated now
+* Added fonts to the `deploy`
 
-Unit test results are printed in terminal, but you can also view them in a browser under `test/results/unit-tests.html`. Get a report of how much of your scripts is covered by testing under `test/coverage`.
+February 04, 2014:
+* Removed coffee dependency
+* Removed some fingerprinted CSS
+* Fixed some CSS/HTML references
+* Cleaned up the builder and watcher and fixed watcher bugs, namely issue compression w/ SVGs
+* Merged pull request from @Contra who added some best practices, thanks! :)
 
-### Images
-
-Image files placed in the `src` > `img` directory will be copied as-is into the `dist` > `img` directory. While you can add image optimization processes to Gulp, I find that tools like [ImageOptim](https://imageoptim.com/) and [b64.io](http://b64.io/) do a better job.
-
-### Static Files
-
-Files and folders placed in the `src` > `static` directory will be copied as-is into the `dist` directory.
-
-### SVGs
-
-SVG files placed in the `src/svg` directory will be optimized with SVGO and compiled into `dist/svg` as-is.
-
-SVG files placed in subdirectories of `src/svg` will be ocmpiled into a single SVG sprite named after the parent directory. For example, files in `src/svg/icons` would compile into a single `icons.svg` file.
-
-### Documentation
-
-Add HTML or markdown (`.md` or `.markdown`) files to your `docs` folder in `src`.
-
-The `_templates` directory in `src` contains the `_header.html` and `_footer.html` templates. These are automatically added to the beginning and end of each documentation page. You can also add your own templates to the `_templates` directory. Include template files in your docs by writing `@@include('path-to-file')` on its own line in your markup (or markdown).
-
-Files placed in the `assets` directory will be moved over as-is to the `docs` directory. The boilerplate will also add a copy of your `dist` files so you can use them in your documentation.
-
-
-
-## Options and Settings
-
-### Updating Project Details
-Open up `package.json` to change the name, version, URL and other data about the project.
-
-### Changing the Header
-Inside `gulpfile.js`, `banner.full` is the expanded header, while `banner.min` is included with minified content.
-
-### Changing the Directory Structure
-Inside `gulpfile.js` you'll see a variable named `paths`. Adjust the paths to suit your workflow.
-
-```js
-var paths = {
-    input: 'src/**/*',
-    output: 'dist/',
-    scripts: {
-        input: 'src/js/*',
-        output: 'dist/js/'
-    },
-    styles: {
-        input: 'src/sass/**/*.{scss,sass}',
-        output: 'dist/css/'
-    },
-    svgs: {
-        input: 'src/svg/*',
-        output: 'dist/svg/'
-    },
-    images: {
-        input: 'src/img/*',
-        output: 'dist/img/'
-    },
-    static: {
-        input: 'src/static/*',
-        output: 'dist/'
-    },
-    test: {
-        input: 'src/js/**/*.js',
-        karma: 'test/karma.conf.js',
-        spec: 'test/spec/**/*.js',
-        coverage: 'test/coverage/',
-        results: 'test/results/'
-    },
-    docs: {
-        input: 'src/docs/*.{html,md,markdown}',
-        output: 'docs/',
-        templates: 'src/docs/_templates/',
-        assets: 'src/docs/assets/**'
-    }
-};
-```
-
-
-
-## Continuous Integration
-
-### Travis CI
-
-This boilerplate includes a configuration file for [Travis CI](http://docs.travis-ci.com/user/getting-started/), a continuous integration service for GitHub.
-
-If you sign-up and activate it for your repository, Travis CI will run your build and execute any processes to make sure everything is working as expected. This is particularly useful when working with a team or managing open source projects with multiple contributors.
-
-The `.travis.yml` file is pre-configured for the boilerplate's build system. Even if you add files or update the Gulp tasks, you shouldn't need to change anything for it to work.
-
-### Codeship
-
-This boilerplate also works with [Codeship.io](https://codeship.com/).
-
-After you have signed up and connected your repository you will be given options for configuring your tests. In the dropdown labeled `Select your technology to prepopulate basic commands` choose `node.js.` This will cause codeship to run npm install prior to running your tests.
-
-Then in the `Configure Test Pipelines` box replace `grunt test` with `gulp test.` Save your settings and make
-a commit to your repository. Codeship should then build and test your repository successfully.
-
-## How to Contribute
-
-In lieu of a formal style guide, take care to maintain the existing coding style. Please apply fixes to both the development and production code. Don't forget to update the version number, and when applicable, the documentation.
-
-
-
-## License
-
-The code is available under the [MIT License](LICENSE.md).
+February 25, 2014
+* I've been using this more in development and production, so this has been fine tuned a bit
+* I added fonts and other misc assets that should be moved from `dev` to `dist` upon deployment
+* I removed image caching because there was an issue where it would randomly break all of the images. I'll figure this but out later though.
+* Updated npm dependencies accordingly

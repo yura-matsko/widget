@@ -1,0 +1,27 @@
+//media query mixin
+
+@mixin leadgen-tablet {
+  @media (max-width: #{$leadgen-mobile}) {
+    @content;
+  }
+}
+
+@mixin leadgen-desktop {
+  @media (max-width: #{$leadgen-tablet}) {
+    @content;
+  }
+}
+
+@mixin leadgen-font {
+  font-family: $leadgen-font-regular;
+  font-size: 12px;
+  line-height: 1.17;
+  font-weight: normal;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder           { @content }
+  &::-moz-placeholder          { @content }
+  &:-ms-input-placeholder      { @content }
+}

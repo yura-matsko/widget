@@ -1,0 +1,36 @@
+// color vars
+
+$leadgen-tundora: #4a4a4a;
+$leadgen-dusty-gray: #9b9b9b;
+$leadgen-wild-sand: #f5f5f5;
+$leadgen-silver: #cdcdcd;
+$leadgen-orange: #ff5722;
+$leadgen-alabaster: #fcfcfc;
+$leadgen-cod-gray: #1c1c1c;
+$leadgen-orient: #005783;
+$leadgen-white: #fff;
+
+// text color
+$leadgen-regular-color: $leadgen-tundora;
+$leadgen-placeholder-color: $leadgen-dusty-gray;
+$leadgen-input-color: $leadgen-cod-gray;
+$leadgen-icon-color: $leadgen-orange;
+
+// border color
+$leadgen-regular-border: $leadgen-silver;
+$leadgen-focused-border: $leadgen-orient;
+
+// background color
+$leadgen-main-bg: $leadgen-wild-sand;
+$leadgen-icon-bg: $leadgen-alabaster;
+$leadgen-btn-bg: $leadgen-orange;
+
+//datepicker styles
+$leadgen-date-grey: #f5f5f5;
+$leadgen-date-text: #656568;
+$leadgen-date-border: #cdcdcd;
+$leadgen-date-active: #656565;
+
+$leadgen-mobile           : 48em;      // 768px
+$leadgen-tablet           : 62em;      // 992px
+$leadgen-desktop          : 75em;      // 1200px

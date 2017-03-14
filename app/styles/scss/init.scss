@@ -1,0 +1,10 @@
+//misc settings
+@import 'config/_variables';
+@import 'config/_mixins';
+@import 'config/_fonts';
+
+//global things
+@import 'general/_widget';
+
+//components
+@import 'components/_datepicker';

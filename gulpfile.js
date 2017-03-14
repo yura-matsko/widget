@@ -1,323 +1,215 @@
-/**
- * Gulp Packages
- */
+//initialize all of our variables
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell, sourceMaps, plumber;
 
-// General
-var gulp = require('gulp');
-var fs = require('fs');
-var del = require('del');
-var lazypipe = require('lazypipe');
-var plumber = require('gulp-plumber');
-var flatten = require('gulp-flatten');
-var tap = require('gulp-tap');
-var rename = require('gulp-rename');
-var header = require('gulp-header');
-var footer = require('gulp-footer');
-var watch = require('gulp-watch');
-var livereload = require('gulp-livereload');
-var package = require('./package.json');
+var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
-// Scripts and tests
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var karma = require('gulp-karma');
+//load all of our dependencies
+//add more here if you want to include more libraries
+gulp        = require('gulp');
+gutil       = require('gulp-util');
+concat      = require('gulp-concat');
+uglify      = require('gulp-uglify');
+sass        = require('gulp-sass');
+sourceMaps  = require('gulp-sourcemaps');
+imagemin    = require('gulp-imagemin');
+minifyCSS   = require('gulp-minify-css');
+browserSync = require('browser-sync');
+autoprefixer = require('gulp-autoprefixer');
+gulpSequence = require('gulp-sequence').use(gulp);
+shell       = require('gulp-shell');
+plumber     = require('gulp-plumber');
+babel       = require('gulp-babel');
 
-// Styles
-var sass = require('gulp-sass');
-var prefix = require('gulp-autoprefixer');
-var minify = require('gulp-cssnano');
-
-// SVGs
-var svgmin = require('gulp-svgmin');
-var svgstore = require('gulp-svgstore');
-
-// Docs
-var markdown = require('gulp-markdown');
-var fileinclude = require('gulp-file-include');
+gulp.task('browserSync', function() {
+    browserSync({
+        server: {
+            baseDir: "app/"
+        },
+        options: {
+            reloadDelay: 250
+        },
+        notify: false
+    });
+});
 
 
-/**
- * Paths to project folders
- */
-
-var paths = {
-    input: 'src/**/*',
-    output: 'dist/',
-    scripts: {
-        input: 'src/js/*',
-        lint: 'src/js/**',
-        output: 'dist/js/'
-    },
-    styles: {
-        input: 'src/sass/**/*.{scss,sass}',
-        output: 'dist/css/'
-    },
-    svgs: {
-        input: 'src/svg/*',
-        output: 'dist/svg/'
-    },
-    images: {
-        input: 'src/img/*',
-        output: 'dist/img/'
-    },
-    fonts: {
-      input: 'src/fonts/*',
-      output: 'dist/fonts/'
-    },
-    static: {
-        input: 'src/static/*',
-        output: 'dist/'
-    },
-    test: {
-        input: 'src/js/**/*.js',
-        karma: 'test/karma.conf.js',
-        spec: 'test/spec/**/*.js',
-        coverage: 'test/coverage/',
-        results: 'test/results/'
-    },
-    docs: {
-        input: 'src/docs/*.{html,md,markdown}',
-        output: 'docs/',
-        templates: 'src/docs/_templates/',
-        assets: 'src/docs/assets/**'
-    }
-};
-
-
-/**
- * Template for banner to add to file headers
- */
-
-var banner = {
-    full :
-        '/*!\n' +
-        ' * <%= package.name %> v<%= package.version %>: <%= package.description %>\n' +
-        ' * (c) ' + new Date().getFullYear() + ' <%= package.author.name %>\n' +
-        ' * MIT License\n' +
-        ' * <%= package.repository.url %>\n' +
-        ' */\n\n',
-    min :
-        '/*!' +
-        ' <%= package.name %> v<%= package.version %>' +
-        ' | (c) ' + new Date().getFullYear() + ' <%= package.author.name %>' +
-        ' | MIT License' +
-        ' | <%= package.repository.url %>' +
-        ' */\n'
-};
-
-
-/**
- * Gulp Taks
- */
-
-// Lint, minify, and concatenate scripts
-gulp.task('build:scripts', ['clean:dist'], function() {
-    var jsTasks = lazypipe()
-        .pipe(header, banner.full, { package : package })
-        .pipe(gulp.dest, paths.scripts.output)
-        .pipe(rename, { suffix: '.min' })
-        .pipe(header, banner.min, { package : package })
-        .pipe(gulp.dest, paths.scripts.output)
-        .pipe(livereload);
-
-    return gulp.src(paths.scripts.input)
+//compressing images & handle SVG files
+gulp.task('images', function(tmp) {
+    gulp.src(['app/images/*.jpg', 'app/images/*.png'])
+        //prevent pipe breaking caused by errors from gulp plugins
         .pipe(plumber())
-        .pipe(tap(function (file, t) {
-            if ( file.isDirectory() ) {
-                var name = file.relative + '.js';
-                return gulp.src(file.path + '/*.js')
-                    .pipe(concat(name))
-                    .pipe(jsTasks());
-            }
-        }))
-        .pipe(jsTasks());
+        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
+        .pipe(gulp.dest('app/images'));
 });
 
-// Process, lint, and minify Sass files
-gulp.task('build:styles', ['clean:dist'], function() {
-    return gulp.src(paths.styles.input)
+//compressing images & handle SVG files
+gulp.task('images-deploy', function() {
+    gulp.src(['app/images/**/*', '!app/images/README'])
+        //prevent pipe breaking caused by errors from gulp plugins
         .pipe(plumber())
-        .pipe(sass({
-            outputStyle: 'expanded',
-            sourceComments: true
-        }))
-        .pipe(flatten())
-        .pipe(prefix({
-            browsers: ['last 2 version', '> 1%'],
-            cascade: true,
-            remove: true
-        }))
-        .pipe(header(banner.full, { package : package }))
-        .pipe(gulp.dest(paths.styles.output))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(minify({
-            discardComments: {
-                removeAll: true
-            }
-        }))
-        .pipe(header(banner.min, { package : package }))
-        .pipe(gulp.dest(paths.styles.output))
-        .pipe(livereload());
+        .pipe(gulp.dest('dist/images'));
 });
 
-// Generate SVG sprites
-gulp.task('build:svgs', ['clean:dist'], function () {
-    return gulp.src(paths.svgs.input)
+//compiling our Javascripts
+gulp.task('scripts', function() {
+    //this is where our dev JS scripts are
+    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/**/*.js'])
+                //prevent pipe breaking caused by errors from gulp plugins
+                .pipe(plumber())
+                //this is the filename of the compressed version of our JS
+                .pipe(concat('app.js'))
+                //catch errors
+                .on('error', gutil.log)
+                //where we will store our finalized, compressed script
+                .pipe(gulp.dest('app/scripts'))
+                //notify browserSync to refresh
+                .pipe(browserSync.reload({stream: true}));
+});
+
+//compiling our Javascripts for deployment
+gulp.task('scripts-deploy', function() {
+    //this is where our dev JS scripts are
+    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/**/*.js'])
+                //add babel for es6 suppoert
+                .pipe(babel({
+                  presets: ['es2015']
+                }))
+                //prevent pipe breaking caused by errors from gulp plugins
+                .pipe(plumber())
+                //this is the filename of the compressed version of our JS
+                .pipe(concat('app.js'))
+                //compress :D
+                .pipe(uglify())
+                //where we will store our finalized, compressed script
+                .pipe(gulp.dest('dist/scripts'));
+});
+
+//compiling our SCSS files
+gulp.task('styles', function() {
+    //the initializer / master SCSS file, which will just be a file that imports everything
+    return gulp.src('app/styles/scss/init.scss')
+                //prevent pipe breaking caused by errors from gulp plugins
+                .pipe(plumber({
+                  errorHandler: function (err) {
+                    console.log(err);
+                    this.emit('end');
+                  }
+                }))
+                //get sourceMaps ready
+                .pipe(sourceMaps.init())
+                //include SCSS and list every "include" folder
+                .pipe(sass({
+                      errLogToConsole: true,
+                      includePaths: [
+                          'app/styles/scss/'
+                      ]
+                }))
+                .pipe(autoprefixer({
+                   browsers: autoPrefixBrowserList,
+                   cascade:  true
+                }))
+                //catch errors
+                .on('error', gutil.log)
+                //the final filename of our combined css file
+                .pipe(concat('styles.css'))
+                //get our sources via sourceMaps
+                .pipe(sourceMaps.write())
+                //where to save our final, compressed css file
+                .pipe(gulp.dest('app/styles'))
+                //notify browserSync to refresh
+                .pipe(browserSync.reload({stream: true}));
+});
+
+//compiling our SCSS files for deployment
+gulp.task('styles-deploy', function() {
+    //the initializer / master SCSS file, which will just be a file that imports everything
+    return gulp.src('app/styles/scss/init.scss')
+                .pipe(plumber())
+                //include SCSS includes folder
+                .pipe(sass({
+                      includePaths: [
+                          'app/styles/scss',
+                      ]
+                }))
+                .pipe(autoprefixer({
+                  browsers: autoPrefixBrowserList,
+                  cascade:  true
+                }))
+                //the final filename of our combined css file
+                .pipe(concat('styles.css'))
+                .pipe(minifyCSS())
+                //where to save our final, compressed css file
+                .pipe(gulp.dest('dist/styles'));
+});
+
+//basically just keeping an eye on all HTML files
+gulp.task('html', function() {
+    //watch any and all HTML files and refresh when something changes
+    return gulp.src('app/*.html')
         .pipe(plumber())
-        .pipe(tap(function (file, t) {
-            if ( file.isDirectory() ) {
-                var name = file.relative + '.svg';
-                return gulp.src(file.path + '/*.svg')
-                    .pipe(svgmin())
-                    .pipe(svgstore({
-                        fileName: name,
-                        prefix: 'icon-',
-                        inlineSvg: true
-                    }))
-                    .pipe(gulp.dest(paths.svgs.output));
-            }
-        }))
-        .pipe(svgmin())
-        .pipe(gulp.dest(paths.svgs.output));
+        .pipe(browserSync.reload({stream: true}))
+        //catch errors
+        .on('error', gutil.log);
 });
 
-// Copy image files into output folder
-gulp.task('build:images', ['clean:dist'], function() {
-    return gulp.src(paths.images.input)
+//migrating over all HTML files for deployment
+gulp.task('html-deploy', function() {
+    //grab everything, which should include htaccess, robots, etc
+    gulp.src('app/*')
+        //prevent pipe breaking caused by errors from gulp plugins
         .pipe(plumber())
-        .pipe(gulp.dest(paths.images.output));
-});
+        .pipe(gulp.dest('dist'));
 
-// Copy image files into output folder
-gulp.task('build:fonts', ['clean:dist'], function() {
-  return gulp.src(paths.fonts.input)
-    .pipe(plumber())
-    .pipe(gulp.dest(paths.fonts.output));
-});
-
-// Copy static files into output folder
-gulp.task('build:static', ['clean:dist'], function() {
-    return gulp.src(paths.static.input)
+    //grab any hidden files too
+    gulp.src('app/.*')
+        //prevent pipe breaking caused by errors from gulp plugins
         .pipe(plumber())
-        .pipe(gulp.dest(paths.static.output));
-});
+        .pipe(gulp.dest('dist'));
 
-// Lint scripts
-gulp.task('lint:scripts', function () {
-    return gulp.src(paths.scripts.lint)
+    gulp.src('app/fonts/**/*')
+        //prevent pipe breaking caused by errors from gulp plugins
         .pipe(plumber())
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
+        .pipe(gulp.dest('dist/fonts'));
+
+    //grab all of the styles
+    gulp.src(['app/styles/*.css', '!app/styles/styles.css'])
+        //prevent pipe breaking caused by errors from gulp plugins
+        .pipe(plumber())
+        .pipe(gulp.dest('dist/styles'));
 });
 
-// Remove pre-existing content from output and test folders
-gulp.task('clean:dist', function () {
-    del.sync([
-        paths.output
+//cleans our dist directory in case things got deleted
+gulp.task('clean', function() {
+    return shell.task([
+      'rm -rf dist'
     ]);
 });
 
-// Remove pre-existing content from text folders
-gulp.task('clean:test', function () {
-    del.sync([
-        paths.test.coverage,
-        paths.test.results
-    ]);
+//create folders using shell
+gulp.task('scaffold', function() {
+  return shell.task([
+      'mkdir dist',
+      'mkdir dist/fonts',
+      'mkdir dist/images',
+      'mkdir dist/scripts',
+      'mkdir dist/styles'
+    ]
+  );
 });
 
-// Run unit tests
-gulp.task('test:scripts', function() {
-    return gulp.src([paths.test.input].concat([paths.test.spec]))
-        .pipe(plumber())
-        .pipe(karma({ configFile: paths.test.karma }))
-        .on('error', function(err) { throw err; });
+//this is our master task when you run `gulp` in CLI / Terminal
+//this is the main watcher to use when in active development
+//  this will:
+//  startup the web server,
+//  start up browserSync
+//  compress all scripts and SCSS files
+gulp.task('default', ['browserSync', 'scripts', 'styles'], function() {
+    //a list of watchers, so it will watch all of the following files waiting for changes
+    gulp.watch('app/scripts/src/**', ['scripts']);
+    gulp.watch('app/styles/scss/**', ['styles']);
+    gulp.watch('app/images/**', ['images']);
+    gulp.watch('app/*.html', ['html']);
 });
 
-// Generate documentation
-gulp.task('build:docs', ['compile', 'clean:docs'], function() {
-    return gulp.src(paths.docs.input)
-        .pipe(plumber())
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file'
-        }))
-        .pipe(tap(function (file, t) {
-            if ( /\.md|\.markdown/.test(file.path) ) {
-                return t.through(markdown);
-            }
-        }))
-        .pipe(header(fs.readFileSync(paths.docs.templates + '/_header.html', 'utf8')))
-        .pipe(footer(fs.readFileSync(paths.docs.templates + '/_footer.html', 'utf8')))
-        .pipe(gulp.dest(paths.docs.output))
-        .pipe(livereload());
-});
-
-// Copy distribution files to docs
-gulp.task('copy:dist', ['compile', 'clean:docs'], function() {
-    return gulp.src(paths.output + '/**')
-        .pipe(plumber())
-        .pipe(gulp.dest(paths.docs.output + '/dist'));
-});
-
-// Copy documentation assets to docs
-gulp.task('copy:assets', ['clean:docs'], function() {
-    return gulp.src(paths.docs.assets)
-        .pipe(plumber())
-        .pipe(gulp.dest(paths.docs.output + '/assets'));
-});
-
-// Remove prexisting content from docs folder
-gulp.task('clean:docs', function () {
-    return del.sync(paths.docs.output);
-});
-
-// Spin up livereload server and listen for file changes
-gulp.task('listen', function () {
-    livereload.listen();
-    gulp.watch(paths.input, ['default']);
-});
-
-
-/**
- * Task Runners
- */
-
-// Compile files
-gulp.task('compile', [
-    'lint:scripts',
-    'clean:dist',
-    'build:scripts',
-    'build:styles',
-    'build:images',
-    'build:fonts',
-    'build:static',
-    'build:svgs'
-]);
-
-// Generate documentation
-gulp.task('docs', [
-    'clean:docs',
-    'build:docs',
-    'copy:dist',
-    'copy:assets'
-]);
-
-// Compile files and generate docs (default)
-gulp.task('default', [
-    'compile',
-    'docs'
-]);
-
-// Compile files and generate docs when something changes
-gulp.task('watch', [
-    'listen',
-    'default'
-]);
-
-// Run unit tests
-gulp.task('test', [
-    'default',
-    'test:scripts'
-]);
+//this is our deployment task, it will set everything for deployment-ready files
+gulp.task('deploy', gulpSequence('clean', 'scaffold', ['scripts-deploy', 'styles-deploy', 'images-deploy'], 'html-deploy'));
