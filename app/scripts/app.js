@@ -1773,12 +1773,59 @@
 (function () {
     'use strict';
 
+    class TrustedshopsData {
+        constructor(el) {
+            const descriptionSpan = el.querySelector('.leadgen__trusted-text i');
+            const markSpan = el.querySelector('.leadgen__trusted-text span');
+            const ratingStars = el.querySelector('.leadgen__trusted-stars--top');
+            let hash;
+
+            if (leadgen_locale == 'de') {
+                hash = 'X5A16CAEF1D1E1E3FD408FA918B69A571'
+            } else {
+                hash = 'X27D6240BF3BE3EAD61877146E7518CF4'
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', `https://api.trustedshops.com/rest/public/v2/shops/${hash}/quality`, true);
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.setRequestHeader('Accept-Language', leadgen_locale);
+            xhr.send();
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState != 4) return;
+
+                if (this.status != 200) {
+                    console.log( 'Error: ' + (this.status ? this.statusText : 'request not send') );
+                    return;
+                }
+
+                let data = JSON.parse(xhr.responseText);
+
+                const reviewIndicator = data.response.data.shop.qualityIndicators.reviewIndicator;
+                const percentageRating = reviewIndicator.overallMark / 5 * 100;
+
+                descriptionSpan.innerHTML = (`"${reviewIndicator.overallMarkDescriptionGUILang}"`);
+                markSpan.innerHTML = (`${reviewIndicator.overallMark}/5.00`);
+                ratingStars.style.width = `${percentageRating}%`;
+            }
+        }
+    }
+    window.TrustedshopsData = TrustedshopsData;
+})();
+(function () {
+    'use strict';
+
     class View {
 
         constructor(el) {
             this.el = el;
 
-            this.render();
+            if (el.dataset.lang === 'fr') {
+                this.renderFR();
+            } else {
+                this.render();
+            }
         }
 
         // !!! Will be changed if future !!!
@@ -1787,21 +1834,23 @@
             this.el.innerHTML = `
               <div class="leadgen__container">
                 <strong class="leadgen__title">Jetzt kostenloses Umzugsangebot erhalten</strong>
-                <form class="leadgen__form js-leadgen-validation" action="https://umzug.movinga.de/plan/entry" method="POST">
+                <form class="leadgen__form js-leadgen-validation" action="https://umzug.movinga.de/plan/entry" method="POST" onkeypress="return event.keyCode != 13;">
                     <div class="leadgen__form-container leadgen__form-container--list">
                         <div class="leadgen__form-row leadgen__form-row">
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-start"></span>
               </span>
-                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugsort'>
+                            <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugsort'>
                             <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
                         <div class="leadgen__form-row">
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-end"></span>
               </span>
-                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugsort'>
+                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugsort'>
                             <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
                     </div>
                     <div class="leadgen__form-container">
@@ -1809,8 +1858,9 @@
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-calendar"></span>
               </span>
-                            <input id="js-leadgen-datepicker" name="date" readonly data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Umzugsdatum'>
+                            <input id="js-leadgen-datepicker" name="dateMoving" readonly data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Umzugsdatum'>
                             <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
                     </div>
                     <div class="leadgen__form-container">
@@ -1818,8 +1868,9 @@
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-mail"></span>
               </span>
-                            <input type="email" data-validaton="leadgen-input-email" name="email" class='leadgen__form-input' placeholder='E-Mail'>
+                            <input type="email" id="leadgen_email" data-validaton="leadgen-input-email" name="email" class='leadgen__form-input' placeholder='E-Mail'>
                             <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
                     </div>
                     <div class="leadgen__form-container">
@@ -1827,8 +1878,9 @@
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-phone"></span>
               </span>
-                            <input type="tel" data-validaton="leadgen-input-phone" name="phone" class='leadgen__form-input' placeholder='Telefonnummer'>
+                            <input type="tel" id="leadgen_phone" data-validaton="leadgen-input-phone" name="telnumber" class='leadgen__form-input' placeholder='Telefonnummer'>
                             <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
                     </div>
                     <div class="leadgen__form-container leadgen__form-container--row">
@@ -1836,20 +1888,35 @@
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-name"></span>
               </span>
-                            <input type="text" class='leadgen__form-input' name="first-name" data-validaton="leadgen-input-text" placeholder='Vorname'>
+                            <input type="text" id="leadgen_first_name" class='leadgen__form-input' name="firstname" data-validaton="leadgen-input-text" placeholder='Vorname'>
                             <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
                         <div class="leadgen__form-row">
-                            <input type="text" class='leadgen__form-input' name="last-name" data-validaton="leadgen-input-text" placeholder='Nachname'>
+                            <input type="text" id="leadgen_last_name" class='leadgen__form-input' name="lastname" data-validaton="leadgen-input-text" placeholder='Nachname'>
                             <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
                     </div>
                     <button type="submit" class="leadgen__form-btn js-leadgen-submit">Angebot berechnen</button>
+                    <div class="leadgen-hidden-input">
+                      <input type="text" hidden id="street_number_from" name="street_number">
+                      <input type="text" hidden id="route_from" name="street_name">
+                      <input type="text" hidden id="locality_from" name="fromCity">
+                      <input type="text" hidden id="postal_code_from" name="fromZip">
+                      <input type="text" hidden id="from-street" name="fromStreet">
+                      <input type="text" hidden id="street_number_to" name="street_number_to">
+                      <input type="text" hidden id="route_to" name="street_name_to">
+                      <input type="text" hidden id="locality_to" name="toCity">
+                      <input type="text" hidden id="postal_code_to" name="toZip">
+                      <input type="text" hidden id="to-street" name="toStreet">
+                      <input type="text" hidden id="leadgen_landing" name="landing">
+                    </div>
                 </form>
                 <ul class="leadgen__list">
                     <li class="leadgen__list-item">
                         <div class="leadgen__trusted">
-                            <img class="leadgen__trusted-img" src="images/logo-trusted.png" width="35" height="35" alt="trusted">
+                            <img class="leadgen__trusted-img" src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/logo-trusted.png" width="35" height="35" alt="trusted">
                             <div class="leadgen__trusted-info">
                                 <div class="leadgen__trusted-stars-holder">
                                     <div class="leadgen__trusted-stars leadgen__trusted-stars--top">
@@ -1867,18 +1934,134 @@
                                         <i class="leadgen__trusted-star">★</i>
                                     </div>
                                 </div>
-                                <span class="leadgen__trusted-text">“Sehr gut” 4.66/5.00</span>
+                                <span class="leadgen__trusted-text"><i>“Sehr gut”</i> <span>4.66/5.00</span></span>
                             </div>
                         </div>
                     </li>
                     <li class="leadgen__list-item">
-                        <img src="images/logo-immobilen.png" width="45" height="40" alt="immobilen">
+                        <img src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/logo-immobilen.png" width="45" height="40" alt="immobilen">
                     </li>
                     <li class="leadgen__list-item">
-                        <img src="images/logo-iam.png" width="52" height="25" alt="aim">
+                        <img src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/logo-iam.png" width="52" height="25" alt="aim">
                     </li>
                 </ul>
                 <p class="leadgen__info">Ihre Daten werden nicht an Dritte weitergegeben. Ihr persönlicher Umzugsberater wird sich mit Ihnen in Verbindung setzen und Sie durch das Angebot führen.</p>
+            </div>`;
+        }
+
+        renderFR () {
+            this.el.innerHTML = `
+              <div class="leadgen__container">
+                <strong class="leadgen__title">Recevez votre devis gratuit en 3 min !</strong>
+                <form class="leadgen__form js-leadgen-validation" action="https://demenagement.movinga.fr/plan/entry" method="POST" onkeypress="return event.keyCode != 13;">
+                    <div class="leadgen__form-container leadgen__form-container--list">
+                        <div class="leadgen__form-row leadgen__form-row">
+              <span class="leadgen__form-holder">
+                <span class="leadgen-icon-start"></span>
+              </span>
+                            <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Départ'>
+                            <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                        </div>
+                        <div class="leadgen__form-row">
+              <span class="leadgen__form-holder">
+                <span class="leadgen-icon-end"></span>
+              </span>
+                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Arrivée'>
+                            <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                        </div>
+                    </div>
+                    <div class="leadgen__form-container">
+                        <div class="leadgen__form-row">
+              <span class="leadgen__form-holder">
+                <span class="leadgen-icon-calendar"></span>
+              </span>
+                            <input id="js-leadgen-datepicker" name="dateMoving" readonly data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Date du déménagement'>
+                            <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                        </div>
+                    </div>
+                    <div class="leadgen__form-container">
+                        <div class="leadgen__form-row">
+              <span class="leadgen__form-holder">
+                <span class="leadgen-icon-mail"></span>
+              </span>
+                            <input type="email" id="leadgen_email" data-validaton="leadgen-input-email" name="email" class='leadgen__form-input' placeholder='Adresse e-mail'>
+                            <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                        </div>
+                    </div>
+                    <div class="leadgen__form-container">
+                        <div class="leadgen__form-row">
+              <span class="leadgen__form-holder">
+                <span class="leadgen-icon-phone"></span>
+              </span>
+                            <input type="tel" id="leadgen_phone" data-validaton="leadgen-input-phone" name="telnumber" class='leadgen__form-input' placeholder='N° de téléphone'>
+                            <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                        </div>
+                    </div>
+                    <div class="leadgen__form-container leadgen__form-container--row">
+                        <div class="leadgen__form-row">
+              <span class="leadgen__form-holder">
+                <span class="leadgen-icon-name"></span>
+              </span>
+                            <input type="text" id="leadgen_first_name" class='leadgen__form-input' name="firstname" data-validaton="leadgen-input-text" placeholder='Prénom'>
+                            <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                        </div>
+                        <div class="leadgen__form-row">
+                            <input type="text" id="leadgen_last_name" class='leadgen__form-input' name="lastname" data-validaton="leadgen-input-text" placeholder='Nom'>
+                            <i class="leadgen__form-focus"></i>
+                            <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="leadgen__form-btn js-leadgen-submit">DEVIS GRATUIT</button>
+                    <div class="leadgen-hidden-input">
+                      <input type="text" hidden id="street_number_from" name="street_number">
+                      <input type="text" hidden id="route_from" name="street_name">
+                      <input type="text" hidden id="locality_from" name="fromCity">
+                      <input type="text" hidden id="postal_code_from" name="fromZip">
+                      <input type="text" hidden id="from-street" name="fromStreet">
+                      <input type="text" hidden id="street_number_to" name="street_number_to">
+                      <input type="text" hidden id="route_to" name="street_name_to">
+                      <input type="text" hidden id="locality_to" name="toCity">
+                      <input type="text" hidden id="postal_code_to" name="toZip">
+                      <input type="text" hidden id="to-street" name="toStreet">
+                      <input type="text" hidden id="leadgen_landing" name="landing">
+                    </div>
+                </form>
+                <ul class="leadgen__list">
+                    <li class="leadgen__list-item">
+                        <div class="leadgen__trusted">
+                            <img class="leadgen__trusted-img" src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/logo-trusted.png" width="35" height="35" alt="trusted">
+                            <div class="leadgen__trusted-info">
+                                <div class="leadgen__trusted-stars-holder">
+                                    <div class="leadgen__trusted-stars leadgen__trusted-stars--top">
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                    </div>
+                                    <div class="leadgen__trusted-stars">
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                    </div>
+                                </div>
+                                <span class="leadgen__trusted-text"><i>“Sehr gut”</i> <span>4.66/5.00</span></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="leadgen__list-item">
+                        <img src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/logo-iam.png" width="52" height="25" alt="aim">
+                    </li>
+                </ul>
+                <p class="leadgen__info">Vos données ne seront pas transmises à des tiers. Votre conseiller personnel en déménagement vous contactera sous peu pour vous présenter notre offre en détail.</p>
             </div>`;
         }
     }
@@ -1901,7 +2084,9 @@
             this.dateInput = 'leadgen-input-date';
             this.addressInput = 'leadgen-input-address';
             this.data = {};
+            this.checkZip = [];
 
+            this.onInit();
             this.registerEvents();
         }
 
@@ -1919,9 +2104,40 @@
             return false;
         }
 
-        checkValidity(showValidationIcons = true) {
+        zipInvalid() {
+            let elem = this.el.querySelector('.leadgen_msg-invalid');
+            elem.classList.add('is-open');
 
+            return false;
+        }
+
+        zipValid() {
+            let elem = this.el.querySelector('.leadgen_msg-invalid');
+            elem.classList.remove('is-open');
+
+            return true;
+        }
+
+        createErrorMsg() {
+            let errorMsg = {
+                de : 'Bitte Postleitzahl eingeben',
+                fr : 'Veuillez entrer votre code postal'
+            };
+            let elem = document.createElement('div');
+            
+            elem.className = 'leadgen_msg-invalid';
+            elem.innerHTML = errorMsg[leadgen_locale];
+
+            return elem;
+        }
+
+        appendMsg() {
+            this.el.insertBefore(this.createErrorMsg(), this.el.firstChild);
+        }
+
+        checkValidity(showValidationIcons = true) {
             let validArr = [];
+            let checkZip = [];
 
             this.input.forEach(el => {
 
@@ -1981,49 +2197,77 @@
 
             // Address inputs
             if (el.dataset.validaton === this.addressInput) {
+                 this.hasZip();
 
-                if (el.value.trim().length != 0) {
-                    validArr.push(el);
-                    return this.makeValid(el);
+                let zipInit;
+
+                if (el.dataset.leadgenAddress === 'address-to') {
+                    zipInit = leadgen_checkZip(leadgen_autocomplete_to);
+                } else {
+                    zipInit = leadgen_checkZip(leadgen_autocomplete);
                 }
 
-                return showValidationIcons ? this.makeInvalid(el) : false;
+                checkZip.push(zipInit);
+
+                if (el.value.trim().length != 0 && zipInit) validArr.push(el);
+
+                if (checkZip.find(this.hasNoZero) === undefined || this.hasZip()) return this.zipValid() && this.makeValid(el);
+
+                return showValidationIcons ? this.makeInvalid(el) || this.zipInvalid() : false;
             }
 
             return this.makeValid(el);
         });
 
-            this.prepareData(validArr);
+            this.prepareData();
             return validArr;
         }
 
-        prepareData(val) {
-            val.forEach(el => this.data[`${el.name}`] = el.value);
+        hasZip() {
+            let inputZip = [...this.el.querySelectorAll('input[name*="Zip"]')];
+            
+            let filledZip = inputZip.every(
+                function isPositive(el) {
+                    return el.value != '';
+                }
+            );
+
+            return filledZip;
         }
 
+        hasNoZero(element, index, array) {
+            if (element === 0) return true;
+        }
+
+        prepareData() {
+          let leadgenInput = document.getElementById('leadgen_landing');
+          let leadgenHolder = document.querySelector('.leadgen');
+          let providerId = leadgenHolder.dataset.providerid;
+          let providerIdDesktop = leadgenHolder.dataset.provideridDesktop;
+          let windowWinth = window.innerWidth;
+
+          if (windowWinth <= 600) {
+              leadgenInput.value = providerId || 'BookingFunnel-LS-M';
+          } else {
+              leadgenInput.value = providerIdDesktop || providerId || 'BookingFunnel-LS-H1';
+          }
+        };
+
         formPost() {
-
-            for(let key in this.data) {
-                if(this.data.hasOwnProperty(key)) {
-                    let hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", key);
-                    hiddenField.setAttribute("value", this.data[key]);
-
-                    this.el.appendChild(hiddenField);
-                }
-            }
             this.el.submit();
         }
 
         formSubmit(e) {
-            this.checkValidity();
 
             if (this.checkValidity().length === this.input.length) {
                 this.formPost();
             }
 
             e.preventDefault();
+        }
+
+        onInit() {
+            this.appendMsg();
         }
 
         registerEvents() {
@@ -2041,16 +2285,22 @@
 
 })();
 
+const leadgen_locale = document.querySelector('.leadgen').dataset.lang || 'de';
+
 (function () {
     'use strict';
 
     let View = window.View;
     let viewRender = document.querySelector('.leadgen');
-    new View(viewRender);
+    if(viewRender) new View(viewRender);
 
     let Validation = window.Validation;
     let validationForm = document.querySelector('.js-leadgen-validation');
-    new Validation(validationForm);
+    if(viewRender) new Validation(validationForm);
+
+    let TrustedshopsData = window.TrustedshopsData;
+    let trustedEl = document.querySelector('.leadgen__trusted');
+    if(viewRender) new TrustedshopsData(trustedEl);
 
     let datepickerLocales = {
 
@@ -2064,15 +2314,27 @@
                 weekdays      : ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
                 weekdaysShort : ['SO','MO','DI','MI','DO','FR','SA']
             }
+        },
+
+        fr: {
+          format: 'DD.MM.YYYY',
+          'firstDay': 1,
+          i18n: {
+            previousMonth: 'Le mois précédent',
+            nextMonth: 'Le mois prochain',
+            months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+            weekdaysShort: ['Dim', 'Lu', 'Ma', 'Me', 'Jeu', 'Vend', 'Sam']
+          }
         }
     };
 
     let picker = new Pikaday({
         field: document.getElementById('js-leadgen-datepicker'),
         showDaysInNextAndPreviousMonths: true,
-        format: datepickerLocales.de.format,
-        firstDay: datepickerLocales.de.firstDay,
-        i18n: datepickerLocales.de.i18n,
+        format: datepickerLocales[leadgen_locale].format,
+        firstDay: datepickerLocales[leadgen_locale].firstDay,
+        i18n: datepickerLocales[leadgen_locale].i18n,
         theme: 'leadgen-theme',
         disableWeekends: true,
 
@@ -2084,14 +2346,71 @@
     })
 })();
 
+let leadgen_componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
 
-function initMap(){
-    let input = [...document.querySelectorAll('[data-leadgen-address]')];
-    let options = {
-        componentRestrictions: {country: 'de'}
-    };
+let leadgen_options = {
+  types: ['geocode'],
+  componentRestrictions: {country: leadgen_locale}
+};
 
-    input.forEach(el => {
-        let autocomplete = new google.maps.places.Autocomplete(el, options);
+function initAutocomplete() {
+
+  leadgen_autocomplete = new google.maps.places.Autocomplete((document.getElementById('leadgen-date-from')), leadgen_options);
+
+  leadgen_autocomplete.addListener('place_changed', function() {
+    leadgen_fillInAddress(leadgen_autocomplete, "_from");
+  });
+
+  leadgen_autocomplete_to = new google.maps.places.Autocomplete((document.getElementById('leadgen-date-to')), leadgen_options);
+
+  leadgen_autocomplete_to.addListener('place_changed', function() {
+    leadgen_fillInAddress(leadgen_autocomplete_to, "_to");
+  });
+
+}
+
+function leadgen_checkZip(autocomplete) {
+  let place = autocomplete.getPlace();
+  let check = [];
+
+  if (place) {
+    check = place.address_components.filter(el => {
+      return el.types[0] === 'postal_code';
     });
+  }
+  
+  return check.length;
+}
+
+function leadgen_fillInAddress(autocomplete, unique) {
+  // Get the place details from the autocomplete object.
+  let place = autocomplete.getPlace();
+
+  for (let component in leadgen_componentForm) {
+    if(!!document.getElementById(component + unique)){
+      document.getElementById(component + unique).value = '';
+      document.getElementById(component + unique).disabled = false;
+    }
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (let i = 0; i < place.address_components.length; i++) {
+
+    let addressType = place.address_components[i].types[0];
+
+    if (leadgen_componentForm[addressType] && document.getElementById(addressType + unique)) {
+      let val = place.address_components[i][leadgen_componentForm[addressType]];
+      document.getElementById(addressType + unique).value = val;
+    }
+  }
+  // !!! Will be changed in future !!!
+  document.getElementById('from-street').value = document.getElementById('route_from').value + ' ' + document.getElementById('street_number_from').value;
+  document.getElementById('to-street').value = document.getElementById('route_to').value + ' ' + document.getElementById('street_number_to').value;
 }

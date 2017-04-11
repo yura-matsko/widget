@@ -13,7 +13,9 @@
             this.dateInput = 'leadgen-input-date';
             this.addressInput = 'leadgen-input-address';
             this.data = {};
+            this.checkZip = [];
 
+            this.onInit();
             this.registerEvents();
         }
 
@@ -31,9 +33,40 @@
             return false;
         }
 
-        checkValidity(showValidationIcons = true) {
+        zipInvalid() {
+            let elem = this.el.querySelector('.leadgen_msg-invalid');
+            elem.classList.add('is-open');
 
+            return false;
+        }
+
+        zipValid() {
+            let elem = this.el.querySelector('.leadgen_msg-invalid');
+            elem.classList.remove('is-open');
+
+            return true;
+        }
+
+        createErrorMsg() {
+            let errorMsg = {
+                de : 'Bitte Postleitzahl eingeben',
+                fr : 'Veuillez entrer votre code postal'
+            };
+            let elem = document.createElement('div');
+            
+            elem.className = 'leadgen_msg-invalid';
+            elem.innerHTML = errorMsg[leadgen_locale];
+
+            return elem;
+        }
+
+        appendMsg() {
+            this.el.insertBefore(this.createErrorMsg(), this.el.firstChild);
+        }
+
+        checkValidity(showValidationIcons = true) {
             let validArr = [];
+            let checkZip = [];
 
             this.input.forEach(el => {
 
@@ -93,49 +126,77 @@
 
             // Address inputs
             if (el.dataset.validaton === this.addressInput) {
+                 this.hasZip();
 
-                if (el.value.trim().length != 0) {
-                    validArr.push(el);
-                    return this.makeValid(el);
+                let zipInit;
+
+                if (el.dataset.leadgenAddress === 'address-to') {
+                    zipInit = leadgen_checkZip(leadgen_autocomplete_to);
+                } else {
+                    zipInit = leadgen_checkZip(leadgen_autocomplete);
                 }
 
-                return showValidationIcons ? this.makeInvalid(el) : false;
+                checkZip.push(zipInit);
+
+                if (el.value.trim().length != 0 && zipInit) validArr.push(el);
+
+                if (checkZip.find(this.hasNoZero) === undefined || this.hasZip()) return this.zipValid() && this.makeValid(el);
+
+                return showValidationIcons ? this.makeInvalid(el) || this.zipInvalid() : false;
             }
 
             return this.makeValid(el);
         });
 
-            this.prepareData(validArr);
+            this.prepareData();
             return validArr;
         }
 
-        prepareData(val) {
-            val.forEach(el => this.data[`${el.name}`] = el.value);
+        hasZip() {
+            let inputZip = [...this.el.querySelectorAll('input[name*="Zip"]')];
+            
+            let filledZip = inputZip.every(
+                function isPositive(el) {
+                    return el.value != '';
+                }
+            );
+
+            return filledZip;
         }
 
+        hasNoZero(element, index, array) {
+            if (element === 0) return true;
+        }
+
+        prepareData() {
+          let leadgenInput = document.getElementById('leadgen_landing');
+          let leadgenHolder = document.querySelector('.leadgen');
+          let providerId = leadgenHolder.dataset.providerid;
+          let providerIdDesktop = leadgenHolder.dataset.provideridDesktop;
+          let windowWinth = window.innerWidth;
+
+          if (windowWinth <= 600) {
+              leadgenInput.value = providerId || 'BookingFunnel-LS-M';
+          } else {
+              leadgenInput.value = providerIdDesktop || providerId || 'BookingFunnel-LS-H1';
+          }
+        };
+
         formPost() {
-
-            for(let key in this.data) {
-                if(this.data.hasOwnProperty(key)) {
-                    let hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", key);
-                    hiddenField.setAttribute("value", this.data[key]);
-
-                    this.el.appendChild(hiddenField);
-                }
-            }
             this.el.submit();
         }
 
         formSubmit(e) {
-            this.checkValidity();
 
             if (this.checkValidity().length === this.input.length) {
                 this.formPost();
             }
 
             e.preventDefault();
+        }
+
+        onInit() {
+            this.appendMsg();
         }
 
         registerEvents() {

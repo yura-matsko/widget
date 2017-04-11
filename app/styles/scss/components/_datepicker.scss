@@ -328,18 +328,18 @@ $pd-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
     background: none;
 
     &:before {
-      content: $icon-arrow;
-      font-family: 'icomoon' !important;
-      speak: none;
+      content: '\e907';
+      font-family: "fontello";
       font-style: normal;
       font-weight: normal;
+      speak: none;
       font-variant: normal;
       text-transform: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       font-size: 33px;
       color: $leadgen-tundora;
       line-height: 1;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
   }
 

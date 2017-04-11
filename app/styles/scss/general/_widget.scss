@@ -40,29 +40,32 @@
       &--list {
 
         &:after {
-          content: $icon-route;
-          font-family: 'icomoon' !important;
-          speak: none;
+          content: '\e906';
+          font-family: "fontello";
           font-style: normal;
           font-weight: normal;
+          speak: none;
           font-variant: normal;
           text-transform: none;
-          font-size: 12px;
-          color: $leadgen-placeholder-color;
-          line-height: 1;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
 
           position: absolute;
           left: 16px;
           top: 50%;
-          margin: -7px 0 0;
+          margin: -8px 0 0;
           opacity: .6;
+          color: $leadgen-dusty-gray;
         }
 
         #{$root}-row:first-child {
 
           #{$root}-input {
+            border-bottom: 1px solid $leadgen-regular-border !important;
+            padding-bottom: 8px !important;
+          }
+
+          #{$root}-valid {
             border-bottom: 1px solid $leadgen-regular-border;
           }
         }
@@ -112,27 +115,31 @@
 
     &-input {
       flex: 0 1 100%;
-      border: 0;
-      padding: 9px 10px;
-      margin: 0;
-      outline: none;
-      position: relative;
-      z-index: 2;
-      color: $leadgen-input-color;
-      background: $leadgen-white;
-      border-radius: 0 2px 2px 0;
-      text-align: left;
+      border: 0 !important;
+      padding: 9px 10px !important;
+      margin: 0 !important;
+      outline: none !important;
+      position: relative !important;
+      z-index: 2 !important;
+      color: $leadgen-input-color !important;
+      background: $leadgen-white !important;
+      border-radius: 0 2px 2px 0 !important;
+      text-align: left !important;
+      height: auto !important;
+      max-width: 100%;
 
       @include leadgen-font;
-      line-height: 18px;
+      line-height: 18px !important;
 
       @include placeholder {
-        font-size: 12px;
-        color: $leadgen-placeholder-color;
+        font-size: 12px !important;
+
+        color: $leadgen-placeholder-color !important;
       }
 
       #{$root}-holder + & {
         flex: 0 1 calc(100% - 35px);
+        max-width: calc(100% - 35px);
       }
 
       &:focus {
@@ -167,11 +174,29 @@
         }
       }
 
+      &.is-valid {
+
+        & ~ #{$root}-valid {
+          display: flex;
+          font-size: 14px;
+          color: $leadgen-orient;
+          background: none;
+          z-index: 30;
+          background: $leadgen-white;
+          align-items: center;
+          padding: 0 10px 0 0;
+        }
+      }
+
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus,
       &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px $leadgen-white inset;
       }
+    }
+
+    &-valid {
+      display: none;
     }
 
     &-btn {
@@ -205,24 +230,34 @@
       }
 
       &:before {
-        content: $icon-arrow;
-        font-family: 'icomoon' !important;
-        speak: none;
+        content: '\e907';
+        font-family: "fontello";
         font-style: normal;
         font-weight: normal;
+        speak: none;
         font-variant: normal;
         text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         font-size: 30px;
         color: $leadgen-white;
         line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
 
         position: absolute;
         right: 10px;
         top: 50%;
         transform: translateY(-50%);
       }
+    }
+  }
+
+  &_msg-invalid {
+    display: none;
+    margin: 0 0 15px;
+    color: $leadgen-orange;
+
+    &.is-open {
+      display: block;
     }
   }
 
@@ -258,6 +293,7 @@
 
     &-info {
       position: relative;
+      text-align: left;
     }
 
     &-stars-holder {
@@ -282,7 +318,6 @@
         z-index: 2;
         color: #f8e81c;
         overflow: hidden;
-        width: 96%;
       }
     }
 
@@ -293,6 +328,10 @@
     &-text {
       display: block;
       font-weight: 600;
+
+      i {
+        font-style: normal;
+      }
 
       @include leadgen-font;
     }

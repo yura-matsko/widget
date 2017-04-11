@@ -3,89 +3,78 @@
 
 $leadgen-font-regular: 'Open Sans', sans-serif;
 
-// icon fonts
-$icomoon-font-path: "../fonts" !default;
-
-$icon-calendar: "\e900";
-$icon-end: "\e901";
-$icon-mail: "\e902";
-$icon-name: "\e903";
-$icon-phone: "\e904";
-$icon-start: "\e905";
-$icon-route: "\e906";
-$icon-arrow: "\e907";
-$icon-validation: "\e908";
-
 @font-face {
-  font-family: 'icomoon';
-  src:
-          url('#{$icomoon-font-path}/icomoon.ttf?mkr9qg') format('truetype'),
-          url('#{$icomoon-font-path}/icomoon.woff?mkr9qg') format('woff'),
-          url('#{$icomoon-font-path}/icomoon.svg?mkr9qg#icomoon') format('svg');
+  font-family: 'fontello';
+  src: url('../fonts/fontello.eot?12562011');
+  src: url('../fonts/fontello.eot?12562011#iefix') format('embedded-opentype'),
+       url('../fonts/fontello.woff2?12562011') format('woff2'),
+       url('../fonts/fontello.woff?12562011') format('woff'),
+       url('../fonts/fontello.ttf?12562011') format('truetype'),
+       url('../fonts/fontello.svg?12562011#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
-
-[class^="leadgen-icon-"], [class*=" leadgen-icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: none;
+ 
+ [class^="leadgen-icon-"]:before,
+ [class*=" leadgen-icon-"]:before {
+  font-family: "fontello";
   font-style: normal;
   font-weight: normal;
+  speak: none;
   font-variant: normal;
   text-transform: none;
+  font-weight: 400;
+  text-transform: none;
   font-size: 33px;
-  color: $leadgen-btn-bg;
+  color: $leadgen-icon-color;
   line-height: 1;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+ 
 .leadgen-icon-calendar {
-  &:before {
-    content: $icon-calendar;
-  }
+
+  &:before { content: '\e900'; }
 }
+
 .leadgen-icon-end {
-  font-size: 31px;
+
   &:before {
-    content: $icon-end;
+    font-size: 31px;
+    content: '\e901';
   }
 }
+
 .leadgen-icon-mail {
-  &:before {
-    content: $icon-mail;
-  }
+
+  &:before { content: '\e902'; }
 }
 .leadgen-icon-name {
-  &:before {
-    content: $icon-name;
-  }
+
+  &:before { content: '\e903'; }
 }
 .leadgen-icon-phone {
-  &:before {
-    content: $icon-phone;
-  }
+
+  &:before { content: '\e904'; }
 }
 .leadgen-icon-start {
-  &:before {
-    content: $icon-start;
-  }
+
+  &:before { content: '\e905'; }
 }
 .leadgen-icon-route {
-  &:before {
-    content: $icon-route;
-  }
+
+  &:before { content: '\e906'; }
 }
 .leadgen-icon-arrow {
-  &:before {
-    content: $icon-arrow;
-  }
+
+  &:before { content: '\e907'; }
 }
+
 .leadgen-icon-validation {
+
   &:before {
-    content: $icon-validation;
+    content: '\e908';
+    font-size: 14px;
+    color: $leadgen-orient;
   }
 }
