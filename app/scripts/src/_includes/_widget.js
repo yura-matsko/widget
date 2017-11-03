@@ -20,29 +20,31 @@
         }
 
         makeValid(el) {
-            el.classList.remove('is-invalid');
-            el.classList.add('is-valid');
+            el.closest('.leadgen__form-container').classList.remove('is-invalid');
+            el.closest('.leadgen__form-container').classList.add('is-valid');
 
             return true;
         }
 
         makeInvalid(el) {
-            el.classList.remove('is-valid');
-            el.classList.add('is-invalid');
+            el.closest('.leadgen__form-container').classList.remove('is-valid');
+            el.closest('.leadgen__form-container').classList.add('is-invalid');
 
             return false;
         }
 
-        zipInvalid() {
+        zipInvalid(el) {
             let elem = this.el.querySelector('.leadgen_msg-invalid');
             elem.classList.add('is-open');
+            el.classList.add('zip-invalid');
 
             return false;
         }
 
-        zipValid() {
+        zipValid(el) {
             let elem = this.el.querySelector('.leadgen_msg-invalid');
             elem.classList.remove('is-open');
+            el.classList.remove('zip-invalid');
 
             return true;
         }
@@ -104,8 +106,7 @@
 
             // Test phone inputs
             if (el.dataset.validaton === this.phoneInput) {
-
-                if (Validation.NUM_REGEXP.test(el.value)) {
+                if ($(el).intlTelInput("isValidNumber")) {
                     validArr.push(el);
                     return this.makeValid(el);
                 }
@@ -126,7 +127,7 @@
 
             // Address inputs
             if (el.dataset.validaton === this.addressInput) {
-                 this.hasZip();
+                this.hasZip();
 
                 let zipInit;
 
@@ -140,9 +141,9 @@
 
                 if (el.value.trim().length != 0 && zipInit) validArr.push(el);
 
-                if (checkZip.find(this.hasNoZero) === undefined || this.hasZip()) return this.zipValid() && this.makeValid(el);
+                if (checkZip.find(this.hasNoZero) === undefined || this.hasZip()) return this.zipValid(el) && this.makeValid(el);
 
-                return showValidationIcons ? this.makeInvalid(el) || this.zipInvalid() : false;
+                return showValidationIcons ? this.makeInvalid(el) || this.zipInvalid(el) : false;
             }
 
             return this.makeValid(el);
@@ -169,30 +170,82 @@
         }
 
         prepareData() {
-          let leadgenInput = document.getElementById('leadgen_landing');
-          let leadgenHolder = document.querySelector('.leadgen');
-          let providerId = leadgenHolder.dataset.providerid;
-          let providerIdDesktop = leadgenHolder.dataset.provideridDesktop;
-          let windowWinth = window.innerWidth;
+            let leadgenInput = document.getElementById('leadgen_landing'),
+                leadgenHolder = document.querySelector('.leadgen'),
+                providerId = leadgenHolder.dataset.providerid,
+                providerIdDesktop = leadgenHolder.dataset.provideridDesktop;
+                
+            if (window.innerWidth <= 600) {
+                leadgenInput.value = providerId || 'BookingFunnel-LS-M';
+            } else {
+                leadgenInput.value = providerIdDesktop || providerId || 'BookingFunnel-LS-H1';
+            }
 
-          if (windowWinth <= 600) {
-              leadgenInput.value = providerId || 'BookingFunnel-LS-M';
-          } else {
-              leadgenInput.value = providerIdDesktop || providerId || 'BookingFunnel-LS-H1';
-          }
+            this.urlParams();
         };
 
         formPost() {
             this.el.submit();
         }
 
+        disableBtn() {
+            this.submitBtn.classList.add('has-spinner');
+        }
+
+        sendData(url, location) {
+            let formData = $(this.el).serialize();
+            
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                crossDomain: true,
+                error: () => console.log('Error')
+            });
+
+            window.location = location;
+        }
+
         formSubmit(e) {
+            let customview = this.el.closest('.leadgen').dataset.version;
+            e.preventDefault();
 
             if (this.checkValidity().length === this.input.length) {
-                this.formPost();
+                this.disableBtn();
+                if(customview === 'v1') {
+                    this.sendData('https://9yo0fqi28f.execute-api.eu-central-1.amazonaws.com/prod', 'http://umzugsfirmenvergleich.com/success');
+                } else if(customview === 'v2') {
+                    this.sendData('https://9yo0fqi28f.execute-api.eu-central-1.amazonaws.com/prod', 'http://umzugskostensparen.com/danke');
+                } else if(customview === 'v3') {
+                    this.sendData('https://9yo0fqi28f.execute-api.eu-central-1.amazonaws.com/prod', 'http://umzugsfirmen24.com/danke');
+                } else {
+                    this.formPost();
+                }
             }
 
-            e.preventDefault();
+            return;
+        }
+
+        urlParams() {
+            let sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                parameters = {},
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                let urlVariables = sURLVariables[i].split('=');
+                parameters[urlVariables[0]] = urlVariables[1];
+            }
+
+            for (let key in parameters) {
+                let hiddenFields = document.querySelector('.leadgen-hidden-input');
+                let input = document.createElement("input");
+                input.type = "text";
+                input.name = key;
+                input.value = parameters[key];
+                input.hidden = true;
+                hiddenFields.appendChild(input);
+            }
         }
 
         onInit() {
@@ -207,7 +260,6 @@
     Validation.NAME_REGEXP  = /^[ äÄäÖöÜüßÀÂÄÈÉÊËÎÏÔŒÙÛÜŸàâäèéêëîïôœùûüÿÇçÀÈÉÌÒÓÙàèéìòóù\-'\w]+$/;
     Validation.EMAIL_REGEXP = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
     Validation.DATE_REGEXP  = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
-    Validation.NUM_REGEXP   = /^\s*\+?[\d\s()-]*$/;
 
     // export
     window.Validation = Validation;

@@ -250,7 +250,7 @@ $pd-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
   background: $leadgen-date-grey;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
   color: $leadgen-date-text;
-  margin: -36px 0 0;
+  margin: 0;
   z-index: 999;
   box-sizing: border-box;
 
@@ -346,4 +346,11 @@ $pd-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
   .pika-prev {
     transform: rotate(180deg);
   }
+}
+
+.leadgen__datepicker-holder {
+  position: absolute;
+  left: 35px;
+  top: 0;
+  z-index: 9999;
 }

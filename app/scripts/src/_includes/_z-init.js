@@ -7,56 +7,47 @@ const leadgen_locale = document.querySelector('.leadgen').dataset.lang || 'de';
     let viewRender = document.querySelector('.leadgen');
     if(viewRender) new View(viewRender);
 
+    let datePicker = window.leadgenDatepicker;
+    let datePickerEl = document.getElementById('js-leadgen-datepicker');
+    if(viewRender) new datePicker(datePickerEl);
+
     let Validation = window.Validation;
     let validationForm = document.querySelector('.js-leadgen-validation');
     if(viewRender) new Validation(validationForm);
 
     let TrustedshopsData = window.TrustedshopsData;
     let trustedEl = document.querySelector('.leadgen__trusted');
-    if(viewRender) new TrustedshopsData(trustedEl);
+    if(viewRender && trustedEl) new TrustedshopsData(trustedEl);
 
-    let datepickerLocales = {
+    if(viewRender) {
+      let input = document.getElementById('leadgen-date-to');
+      input.oninput = () => {
+        input.closest('.leadgen__form-container').classList.add('js-trigger');
+      };
+    }
 
-        de : {
-            format : 'DD.MM.YYYY',
-            firstDay: 1,
-            i18n : {
-                previousMonth : 'Dieser Monat',
-                nextMonth     : 'Nächster Monat',
-                months        : ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
-                weekdays      : ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
-                weekdaysShort : ['SO','MO','DI','MI','DO','FR','SA']
-            }
+    document.addEventListener('DOMContentLoaded', function(){
+      $("#leadgen_phone").intlTelInput({
+        initialCountry: "auto",
+        onlyCountries: ["al", "ad", "at", "by", "be", "ba", "bg", "hr", "cz", "dk",
+          "ee", "fo", "fi", "fr", "de", "gi", "gr", "va", "hu", "is", "ie", "it", "lv",
+          "li", "lt", "lu", "mk", "mt", "md", "mc", "me", "nl", "no", "pl", "pt", "ro",
+          "ru", "sm", "rs", "sk", "si", "es", "se", "ch", "ua", "gb"],
+        geoIpLookup: function(callback) {
+          $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+            var countryCode = (resp && resp.country) ? resp.country : "";
+            callback(countryCode);
+          });
         },
+        utilsScript: "https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/scripts/utils.js"
+      });
 
-        fr: {
-          format: 'DD.MM.YYYY',
-          'firstDay': 1,
-          i18n: {
-            previousMonth: 'Le mois précédent',
-            nextMonth: 'Le mois prochain',
-            months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-            weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-            weekdaysShort: ['Dim', 'Lu', 'Ma', 'Me', 'Jeu', 'Vend', 'Sam']
-          }
-        }
-    };
-
-    let picker = new Pikaday({
-        field: document.getElementById('js-leadgen-datepicker'),
-        showDaysInNextAndPreviousMonths: true,
-        format: datepickerLocales[leadgen_locale].format,
-        firstDay: datepickerLocales[leadgen_locale].firstDay,
-        i18n: datepickerLocales[leadgen_locale].i18n,
-        theme: 'leadgen-theme',
-        disableWeekends: true,
-
-        minDate: function() {
-            let min = moment().add(4, 'days');
-
-            return min.toDate();
-        }()
-    })
+      $("#leadgen_phone").on('blur', function(){
+        $(this).parents('.leadgen__form-container').removeClass('is-focused');
+      }).on('focus', function(){
+        $(this).parents('.leadgen__form-container').addClass('is-focused');
+      });
+    });
 })();
 
 let leadgen_componentForm = {
@@ -100,6 +91,7 @@ function leadgen_checkZip(autocomplete) {
   
   return check.length;
 }
+let streets = [];
 
 function leadgen_fillInAddress(autocomplete, unique) {
   // Get the place details from the autocomplete object.
@@ -120,10 +112,9 @@ function leadgen_fillInAddress(autocomplete, unique) {
 
     if (leadgen_componentForm[addressType] && document.getElementById(addressType + unique)) {
       let val = place.address_components[i][leadgen_componentForm[addressType]];
+
       document.getElementById(addressType + unique).value = val;
+      document.querySelector(`.street${unique}`).value = place.name;
     }
   }
-  // !!! Will be changed in future !!!
-  document.getElementById('from-street').value = document.getElementById('route_from').value + ' ' + document.getElementById('street_number_from').value;
-  document.getElementById('to-street').value = document.getElementById('route_to').value + ' ' + document.getElementById('street_number_to').value;
 }
