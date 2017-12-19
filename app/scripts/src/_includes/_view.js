@@ -42,7 +42,7 @@
                 <span class="leadgen__form-holder">
                     <span class="leadgen-icon-start"></span>
                 </span>
-                                <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugsort - Straße, Hausnummer, PLZ, Ort'>
+                                <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugsort'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
@@ -51,7 +51,7 @@
                 <span class="leadgen__form-holder">
                     <span class="leadgen-icon-end"></span>
                 </span>
-                                <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugsort - Straße, Hausnummer, PLZ, Ort'>
+                                <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugsort'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
@@ -469,7 +469,7 @@
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-start"></span>
               </span>
-                            <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Départ - N° de Rue et Rue, Code Postal, Lieu'>
+                            <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Adresse de départ'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
@@ -477,7 +477,7 @@
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-end"></span>
               </span>
-                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Arrivée - N° de Rue et Rue, Code Postal, Lieu'>
+                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Adresse de d’arrivée'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>

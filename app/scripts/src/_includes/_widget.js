@@ -13,9 +13,7 @@
             this.dateInput = 'leadgen-input-date';
             this.addressInput = 'leadgen-input-address';
             this.data = {};
-            this.checkZip = [];
-
-            this.onInit();
+            
             this.registerEvents();
         }
 
@@ -33,42 +31,15 @@
             return false;
         }
 
-        zipInvalid(el) {
-            let elem = this.el.querySelector('.leadgen_msg-invalid');
-            elem.classList.add('is-open');
-            el.classList.add('zip-invalid');
-
-            return false;
-        }
-
-        zipValid(el) {
-            let elem = this.el.querySelector('.leadgen_msg-invalid');
-            elem.classList.remove('is-open');
-            el.classList.remove('zip-invalid');
-
-            return true;
-        }
-
-        createErrorMsg() {
-            let errorMsg = {
-                de : 'Bitte Postleitzahl eingeben',
-                fr : 'Veuillez entrer votre code postal'
-            };
-            let elem = document.createElement('div');
+        checkAddress() {
+            const cityFrom = document.getElementById('locality_from').value;
+            const cityTo = document.getElementById('locality_to').value;
             
-            elem.className = 'leadgen_msg-invalid';
-            elem.innerHTML = errorMsg[leadgen_locale];
-
-            return elem;
-        }
-
-        appendMsg() {
-            this.el.insertBefore(this.createErrorMsg(), this.el.firstChild);
+            return (cityFrom !== '' && cityTo !== '')
         }
 
         checkValidity(showValidationIcons = true) {
             let validArr = [];
-            let checkZip = [];
 
             this.input.forEach(el => {
 
@@ -127,23 +98,13 @@
 
             // Address inputs
             if (el.dataset.validaton === this.addressInput) {
-                this.hasZip();
 
-                let zipInit;
-
-                if (el.dataset.leadgenAddress === 'address-to') {
-                    zipInit = leadgen_checkZip(leadgen_autocomplete_to);
-                } else {
-                    zipInit = leadgen_checkZip(leadgen_autocomplete);
+                if (el.value.trim().length != 0 && this.checkAddress()) {
+                    validArr.push(el);
+                    return this.makeValid(el);
                 }
 
-                checkZip.push(zipInit);
-
-                if (el.value.trim().length != 0 && zipInit) validArr.push(el);
-
-                if (checkZip.find(this.hasNoZero) === undefined || this.hasZip()) return this.zipValid(el) && this.makeValid(el);
-
-                return showValidationIcons ? this.makeInvalid(el) || this.zipInvalid(el) : false;
+                return showValidationIcons ? this.makeInvalid(el) : false;
             }
 
             return this.makeValid(el);
@@ -151,22 +112,6 @@
 
             this.prepareData();
             return validArr;
-        }
-
-        hasZip() {
-            let inputZip = [...this.el.querySelectorAll('input[name*="Zip"]')];
-            
-            let filledZip = inputZip.every(
-                function isPositive(el) {
-                    return el.value != '';
-                }
-            );
-
-            return filledZip;
-        }
-
-        hasNoZero(element, index, array) {
-            if (element === 0) return true;
         }
 
         prepareData() {
@@ -246,10 +191,6 @@
                 input.hidden = true;
                 hiddenFields.appendChild(input);
             }
-        }
-
-        onInit() {
-            this.appendMsg();
         }
 
         registerEvents() {

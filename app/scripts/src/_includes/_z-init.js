@@ -26,19 +26,24 @@ const leadgen_locale = document.querySelector('.leadgen').dataset.lang || 'de';
       };
     }
 
+    const host = window.location.host;
+    const hostLang = (host === 'www.movinga.fr') ? 'fr' : 'de';
+
     document.addEventListener('DOMContentLoaded', function(){
       $("#leadgen_phone").intlTelInput({
-        initialCountry: "auto",
+        initialCountry: hostLang,
         onlyCountries: ["al", "ad", "at", "by", "be", "ba", "bg", "hr", "cz", "dk",
           "ee", "fo", "fi", "fr", "de", "gi", "gr", "va", "hu", "is", "ie", "it", "lv",
           "li", "lt", "lu", "mk", "mt", "md", "mc", "me", "nl", "no", "pl", "pt", "ro",
           "ru", "sm", "rs", "sk", "si", "es", "se", "ch", "ua", "gb"],
+        /*
         geoIpLookup: function(callback) {
           $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
             var countryCode = (resp && resp.country) ? resp.country : "";
             callback(countryCode);
           });
         },
+        */
         utilsScript: "https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/scripts/utils.js"
       });
 
@@ -78,19 +83,6 @@ function initAutocomplete() {
   });
 
 }
-
-function leadgen_checkZip(autocomplete) {
-  let place = autocomplete.getPlace();
-  let check = [];
-
-  if (place) {
-    check = place.address_components.filter(el => {
-      return el.types[0] === 'postal_code';
-    });
-  }
-  
-  return check.length;
-}
 let streets = [];
 
 function leadgen_fillInAddress(autocomplete, unique) {
@@ -114,7 +106,7 @@ function leadgen_fillInAddress(autocomplete, unique) {
       let val = place.address_components[i][leadgen_componentForm[addressType]];
 
       document.getElementById(addressType + unique).value = val;
-      document.querySelector(`.street${unique}`).value = place.name;
+      if(addressType === 'route') document.querySelector(`.street${unique}`).value = place.name;
     }
   }
 }

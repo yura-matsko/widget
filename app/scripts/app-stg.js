@@ -2001,7 +2001,7 @@ let leadgen_holidays = {
                 <span class="leadgen__form-holder">
                     <span class="leadgen-icon-start"></span>
                 </span>
-                                <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugsort'>
+                                <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugsort - Straße, Hausnummer, PLZ, Ort'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
@@ -2010,7 +2010,7 @@ let leadgen_holidays = {
                 <span class="leadgen__form-holder">
                     <span class="leadgen-icon-end"></span>
                 </span>
-                                <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugsort'>
+                                <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugsort - Straße, Hausnummer, PLZ, Ort'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
@@ -2428,7 +2428,7 @@ let leadgen_holidays = {
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-start"></span>
               </span>
-                            <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Adresse de départ'>
+                            <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Départ - N° de Rue et Rue, Code Postal, Lieu'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
@@ -2436,7 +2436,7 @@ let leadgen_holidays = {
               <span class="leadgen__form-holder">
                 <span class="leadgen-icon-end"></span>
               </span>
-                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Adresse de d’arrivée'>
+                            <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Arrivée - N° de Rue et Rue, Code Postal, Lieu'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
@@ -2785,24 +2785,19 @@ const leadgen_locale = document.querySelector('.leadgen').dataset.lang || 'de';
       };
     }
 
-    const host = window.location.host;
-    const hostLang = (host === 'www.movinga.fr') ? 'fr' : 'de';
-
     document.addEventListener('DOMContentLoaded', function(){
       $("#leadgen_phone").intlTelInput({
-        initialCountry: hostLang,
+        initialCountry: "auto",
         onlyCountries: ["al", "ad", "at", "by", "be", "ba", "bg", "hr", "cz", "dk",
           "ee", "fo", "fi", "fr", "de", "gi", "gr", "va", "hu", "is", "ie", "it", "lv",
           "li", "lt", "lu", "mk", "mt", "md", "mc", "me", "nl", "no", "pl", "pt", "ro",
           "ru", "sm", "rs", "sk", "si", "es", "se", "ch", "ua", "gb"],
-        /*
         geoIpLookup: function(callback) {
           $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
             var countryCode = (resp && resp.country) ? resp.country : "";
             callback(countryCode);
           });
         },
-        */
         utilsScript: "https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/scripts/utils.js"
       });
 
@@ -2847,6 +2842,8 @@ let streets = [];
 function leadgen_fillInAddress(autocomplete, unique) {
   // Get the place details from the autocomplete object.
   let place = autocomplete.getPlace();
+
+  console.log(place);
 
   for (let component in leadgen_componentForm) {
     if(!!document.getElementById(component + unique)){
