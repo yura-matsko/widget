@@ -1967,12 +1967,6 @@ let leadgen_holidays = {
 
             if (el.dataset.lang === 'fr') {
                if (el.dataset.version === 'v1') {
-                    this.renderFRV1();
-                } else if (el.dataset.version === 'v2') {
-                    this.renderFRV2();
-                } else if (el.dataset.version === 'v3') {
-                    this.renderFRV3();
-                } else {
                     this.renderFRV0();
                 }
             } else {
@@ -2004,7 +1998,6 @@ let leadgen_holidays = {
                                 <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugsort'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
                             </div>
                             <div class="leadgen__form-row">
                 <span class="leadgen__form-holder">
@@ -2013,8 +2006,8 @@ let leadgen_holidays = {
                                 <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugsort'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
                             </div>
+                            <div class="leadgen__form-error">Bitte wählen Sie aus der automatischen Vorschlagsliste</div>
                         </div>
                         <div class="leadgen__form-container leadgen__form-container--date">
                             <div class="leadgen__form-row">
@@ -2035,11 +2028,13 @@ let leadgen_holidays = {
                                 <input type="text" id="leadgen_first_name" class='leadgen__form-input' name="firstname" data-validaton="leadgen-input-text" placeholder='Vorname'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihren Vornamen ein</div>
                             </div>
                             <div class="leadgen__form-row">
                                 <input type="text" id="leadgen_last_name" class='leadgen__form-input' name="lastname" data-validaton="leadgen-input-text" placeholder='Nachname'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihren Nachname ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-container leadgen__form-container--email">
@@ -2050,6 +2045,7 @@ let leadgen_holidays = {
                                 <input type="email" id="leadgen_email" data-validaton="leadgen-input-email" name="email" class='leadgen__form-input' placeholder='E-Mail'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihre E-Mail-Adresse ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-container leadgen__form-container--phone">
@@ -2060,6 +2056,7 @@ let leadgen_holidays = {
                                 <input type="tel" id="leadgen_phone" data-validaton="leadgen-input-phone" name="telnumber" class='leadgen__form-input'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                                <div class="leadgen__form-error">Bitte geben Sie eine gültige Telefonnummer ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-btn-holder">
@@ -2132,7 +2129,6 @@ let leadgen_holidays = {
                                     <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugstrasse, N°, PLZ, Stadt'>
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                    <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
                                 </div>
                             </div>
                             <div class="leadgen__form-container leadgen__form-container--address">
@@ -2140,7 +2136,6 @@ let leadgen_holidays = {
                                     <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugstrasse, N°, PLZ, Stadt'>
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                    <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
                                 </div>
                             </div>
                         </div>
@@ -2238,7 +2233,7 @@ let leadgen_holidays = {
                                 <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugstrasse, N°, PLZ, Stadt'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
+                                <div class="leadgen__form-error">Bitte wählen Sie aus der automatischen Vorschlagsliste</div>
                             </div>
                         </div>
                         <div class="leadgen__form-container leadgen__form-container--address">
@@ -2246,7 +2241,7 @@ let leadgen_holidays = {
                                 <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugstrasse, N°, PLZ, Stadt'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
+                                <div class="leadgen__form-error">Bitte wählen Sie aus der automatischen Vorschlagsliste</div>
                             </div>
                         </div>
                         <div class="leadgen__form-area">
@@ -2271,6 +2266,7 @@ let leadgen_holidays = {
                                 <input type="email" id="leadgen_email" data-validaton="leadgen-input-email" name="email" class='leadgen__form-input' placeholder='E-Mail'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihre E-Mail-Adresse ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-container">
@@ -2278,6 +2274,7 @@ let leadgen_holidays = {
                                 <input type="tel" id="leadgen_phone" data-validaton="leadgen-input-phone" name="telnumber" class='leadgen__form-input'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                                <div class="leadgen__form-error">Bitte geben Sie eine gültige Telefonnummer ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-area">
@@ -2287,6 +2284,7 @@ let leadgen_holidays = {
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 </div>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihren Vornamen ein</div>
                             </div>
                             <div class="leadgen__form-container leadgen__form-container--name">
                                 <div class="leadgen__form-row">
@@ -2294,6 +2292,7 @@ let leadgen_holidays = {
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 </div>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihren Nachname ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-btn-holder">
@@ -2336,16 +2335,16 @@ let leadgen_holidays = {
                                     <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Auszugstrasse, N°, PLZ, Stadt'>
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                    <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
                                 </div>
+                                <div class="leadgen__form-error">Bitte wählen Sie aus der automatischen Vorschlagsliste</div>
                             </div>
                             <div class="leadgen__form-container leadgen__form-container--address">
                                 <div class="leadgen__form-row">
                                     <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Einzugstrasse, N°, PLZ, Stadt'>
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                    <div class="leadgen__form-error-zip">Bitte Postleitzahl eingeben</div>
                                 </div>
+                                <div class="leadgen__form-error">Bitte wählen Sie aus der automatischen Vorschlagsliste</div>
                             </div>
                         </div>
                         <div class="leadgen__form-area">
@@ -2365,6 +2364,7 @@ let leadgen_holidays = {
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 </div>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihre E-Mail-Adresse ein</div>
                             </div>
                             <div class="leadgen__form-container">
                                 <div class="leadgen__form-row">
@@ -2372,6 +2372,7 @@ let leadgen_holidays = {
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 </div>
+                                <div class="leadgen__form-error">Bitte geben Sie eine gültige Telefonnummer ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-area">
@@ -2381,6 +2382,7 @@ let leadgen_holidays = {
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 </div>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihren Vornamen ein</div>
                             </div>
                             <div class="leadgen__form-container leadgen__form-container--name">
                                 <div class="leadgen__form-row">
@@ -2388,6 +2390,7 @@ let leadgen_holidays = {
                                     <i class="leadgen__form-focus"></i>
                                     <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 </div>
+                                <div class="leadgen__form-error">Bitte geben Sie Ihren Nachname ein</div>
                             </div>
                         </div>
                         <div class="leadgen__form-btn-holder">
@@ -2431,6 +2434,7 @@ let leadgen_holidays = {
                             <input data-validaton="leadgen-input-address" id="leadgen-date-from" data-leadgen-address="address-from" name="address-from" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Adresse de départ'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                            <div class="leadgen__form-error">Veuillez sélectionner dans la liste des adresses suggérées</div>
                         </div>
                         <div class="leadgen__form-row">
               <span class="leadgen__form-holder">
@@ -2439,6 +2443,7 @@ let leadgen_holidays = {
                             <input data-validaton="leadgen-input-address" data-leadgen-address="address-to" id="leadgen-date-to" name="address-to" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Adresse de d’arrivée'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                            <div class="leadgen__form-error">Veuillez sélectionner dans la liste des adresses suggérées</div>
                         </div>
                     </div>
                     <div class="leadgen__form-container">
@@ -2460,11 +2465,13 @@ let leadgen_holidays = {
                             <input type="text" id="leadgen_first_name" class='leadgen__form-input' name="firstname" data-validaton="leadgen-input-text" placeholder='Prénom'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                            <div class="leadgen__form-error">Veuillez svp entrer votre prénom</div>
                         </div>
                         <div class="leadgen__form-row">
                             <input type="text" id="leadgen_last_name" class='leadgen__form-input' name="lastname" data-validaton="leadgen-input-text" placeholder='Nom'>
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                            <div class="leadgen__form-error">Veuillez svp entrer votre nom</div>
                         </div>
                     </div>
                     <div class="leadgen__form-container">
@@ -2476,6 +2483,7 @@ let leadgen_holidays = {
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
+                        <div class="leadgen__form-error">Veuillez svp entrer votre Email</div>
                     </div>
                     <div class="leadgen__form-container">
                         <div class="leadgen__form-row">
@@ -2486,6 +2494,7 @@ let leadgen_holidays = {
                             <i class="leadgen__form-focus"></i>
                             <i class="leadgen__form-valid leadgen-icon-validation"></i>
                         </div>
+                        <div class="leadgen__form-error">Veuillez svp entrer un numéro valide</div>
                     </div>
                     <div class="leadgen__form-btn-holder">
                         <button type="submit" class="leadgen__form-btn js-leadgen-submit">
