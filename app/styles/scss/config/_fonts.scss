@@ -14,22 +14,25 @@ $leadgen-font-regular: 'Open Sans', sans-serif;
   font-weight: normal;
   font-style: normal;
 }
- 
- [class^="leadgen-icon-"]:before,
- [class*=" leadgen-icon-"]:before {
+
+.leadgen .glyphicon:before,
+[class^="leadgen-icon-"]:before,
+[class*=" leadgen-icon-"]:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
   speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  text-align: center;
   font-variant: normal;
   text-transform: none;
-  font-weight: 400;
-  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: 33px;
   color: $leadgen-icon-color;
   line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
  
 .leadgen-icon-calendar {
@@ -68,6 +71,36 @@ $leadgen-font-regular: 'Open Sans', sans-serif;
 .leadgen-icon-arrow {
 
   &:before { content: '\e907'; }
+}
+
+.leadgen-icon-clock {
+
+  &:before {
+    font-size: 16px;
+    content: '\e800';
+  }
+}
+
+.leadgen-icon-code {
+
+  &:before {
+    font-size: 16px;
+    content: '\f121';
+  }
+}
+
+.leadgen .glyphicon-chevron-up,
+.leadgen-icon-up {
+  &:before {
+    content: '\f106';
+  }
+}
+
+.leadgen .glyphicon-chevron-down,
+.leadgen-icon-down {
+  &:before {
+    content: '\f107';
+  }
 }
 
 .leadgen-icon-validation {

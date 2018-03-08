@@ -19,11 +19,15 @@ const leadgen_locale = document.querySelector('.leadgen').dataset.lang || 'de';
     let trustedEl = document.querySelector('.leadgen__trusted');
     if(viewRender && trustedEl) new TrustedshopsData(trustedEl);
 
+    let TimePicker = window.TimePicker;
+    let timePickerEl = document.querySelector('#leadgen_time');
+    if(viewRender && timePickerEl) new TimePicker(timePickerEl);
+
     if(viewRender) {
       let input = document.getElementById('leadgen-date-to');
-      input.oninput = () => {
-        input.closest('.leadgen__form-container').classList.add('js-trigger');
-      };
+      if (input) {
+        input.oninput = () => input.closest('.leadgen__form-container').classList.add('js-trigger')
+      }
     }
 
     const host = window.location.host;

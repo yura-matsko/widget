@@ -11,6 +11,7 @@
             this.emailInput = 'leadgen-input-email';
             this.phoneInput = 'leadgen-input-phone';
             this.dateInput = 'leadgen-input-date';
+            this.timeInput = 'leadgen-input-time';
             this.addressInput = 'leadgen-input-address';
             this.data = {};
             
@@ -105,6 +106,17 @@
                 }
 
                 return showValidationIcons ? this.makeInvalid(el) : false;
+            }
+
+            // Time inputs
+            if (el.dataset.validaton === this.timeInput) {
+
+              if (el.value.trim().length != 0) {
+                validArr.push(el);
+                return this.makeValid(el);
+              }
+
+              return showValidationIcons ? this.makeInvalid(el) : false;
             }
 
             return this.makeValid(el);
