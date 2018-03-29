@@ -39,6 +39,8 @@
     }
 
     initDatepicker() {
+      const { dataset } = this.el;
+
       this.picker = new Pikaday({
         field: this.el,
         showDaysInNextAndPreviousMonths: true,
@@ -51,11 +53,15 @@
       });
 
       this.fetchHolidays(moment().year(), (endYear) => {
-        this.picker.setMinDate(this.workingDaysSinceToday(4));
         this.picker.setDate(this.getDefaultDate());
+
+        dataset.callmodal ?
+          this.picker.setMinDate(moment().toDate())
+          : this.picker.setMinDate(this.workingDaysSinceToday(4));
+
         this.picker.setMaxDate(moment([endYear, 11, 31]).toDate());
         this.picker.draw();
-      });
+      })
     }
 
     fetchHolidays(startYear = moment().year(), callback) {

@@ -1216,6 +1216,8 @@
     }
 
     initDatepicker() {
+      const { dataset } = this.el;
+
       this.picker = new Pikaday({
         field: this.el,
         showDaysInNextAndPreviousMonths: true,
@@ -1228,11 +1230,15 @@
       });
 
       this.fetchHolidays(moment().year(), (endYear) => {
-        this.picker.setMinDate(this.workingDaysSinceToday(4));
         this.picker.setDate(this.getDefaultDate());
+
+        dataset.callmodal ?
+          this.picker.setMinDate(moment().toDate())
+          : this.picker.setMinDate(this.workingDaysSinceToday(4));
+
         this.picker.setMaxDate(moment([endYear, 11, 31]).toDate());
         this.picker.draw();
-      });
+      })
     }
 
     fetchHolidays(startYear = moment().year(), callback) {
@@ -3161,9 +3167,11 @@ let leadgen_holidays = {
             this.el = el;
 
             if (el.dataset.lang === 'fr') {
-               if (el.dataset.version === 'v1') {
-                    this.renderFRV0();
-                }
+              if (el.dataset.version === 'v4') {
+                this.renderFRV4();
+              } else {
+                this.renderFRV0();
+              }
             } else {
                 if (el.dataset.version === 'v1') {
                     this.renderV1();
@@ -3172,8 +3180,6 @@ let leadgen_holidays = {
                 } else if (el.dataset.version === 'v3') {
                     this.renderV3();
                 } else if (el.dataset.version === 'v4') {
-                  const params = new URLSearchParams(window.location.search);
-                  this.sid = params.get('sid');
                   this.renderV4();
                 } else {
                     this.renderV0();
@@ -3622,38 +3628,27 @@ let leadgen_holidays = {
 
       renderV4 () {
         this.el.innerHTML = `
-              <div class="leadgen__container">
-                <strong class="leadgen__title">Jetzt kostenloses Umzugsangebot erhalten</strong>
-                <form class="leadgen__form js-leadgen-validation" action="https://umzug.movinga.de/plan/entry/${this.sid}" method="POST" onkeypress="return event.keyCode != 13;">
+              <div class="leadgen__container leadgen__container--mobile">
+                <strong class="leadgen__title">Kostenlose Expertenberatung <div><strong class="leadgen__title--error">Ein Fehler ist aufgetreten. Bitte versuchen Sie es noch einmal.</strong></div></strong>
+                <form class="leadgen__form js-leadgen-validation" action="#" method="POST" onkeypress="return event.keyCode != 13;">
                     <div class="leadgen__form-wrapper">
-                        <div class="leadgen__form-container leadgen__form-container--sid">
-                            <div class="leadgen__form-row">
-                                <span class="leadgen__form-holder">
-                                    <span class="leadgen-icon-code"></span>
-                                </span>
-                                <input type="text" id="leadgen_sid" value=${this.sid} data-validaton="leadgen-input-text" placeholder="SID" readonly name="sid" class='leadgen__form-input'>
-                                <i class="leadgen__form-focus"></i>
-                                <i class="leadgen__form-valid leadgen-icon-validation"></i>
-                                <div class="leadgen__form-error">Bitte geben Sie eine gültige SID</div>
-                            </div>
-                        </div>
                         <div class="leadgen__form-container leadgen__form-container--date">
                             <div class="leadgen__form-row">
                 <span class="leadgen__form-holder">
                     <span class="leadgen-icon-calendar"></span>
                 </span>
-                                <input id="js-leadgen-datepicker" name="dateMoving" readonly data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Umzugsdatum'>
+                                <input id="js-leadgen-datepicker" name="date" readonly data-callModal="true" data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Umzugsdatum'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
                             </div>
                             <div class="leadgen__datepicker-holder"></div>
                         </div>
-                        <div class="leadgen__form-container leadgen__form-container--email">
+                        <div class="leadgen__form-container leadgen__form-container--time">
                             <div class="leadgen__form-row">
                 <span class="leadgen__form-holder">
                     <span class="leadgen-icon-clock"></span>
                 </span>
-                                <input type="text" id="leadgen_time" data-validaton="leadgen-input-time" name="time" class='leadgen__form-input' placeholder='Time'>
+                                <input type="text" id="leadgen_time" readonly data-validaton="leadgen-input-time" name="time" class='leadgen__form-input' placeholder='Time'>
                                 <i class="leadgen__form-focus"></i>
                                 <i class="leadgen__form-valid leadgen-icon-validation"></i>
                                 <div id="timepicker-container"></div>
@@ -3662,7 +3657,7 @@ let leadgen_holidays = {
                         </div>
                         <div class="leadgen__form-btn-holder">
                             <button type="submit" class="leadgen__form-btn js-leadgen-submit">
-                                Angebot berechnen
+                                Rückruf vereinbaren
                                 <div class="leadgen__form-spinner">
                                     <div class="leadgen__form-bounce1"></div>
                                     <div class="leadgen__form-bounce2"></div>
@@ -3672,19 +3667,17 @@ let leadgen_holidays = {
                         </div>
                     </div>
                     <div class="leadgen-hidden-input">
-                      <input type="text" hidden id="street_number_from" name="street_number">
-                      <input type="text" hidden id="route_from" name="street_name">
-                      <input type="text" hidden id="locality_from" name="fromCity">
-                      <input type="text" hidden id="postal_code_from" name="fromZip">
-                      <input type="text" hidden id="from-street" class="street_from" name="fromStreet">
-                      <input type="text" hidden id="street_number_to" name="street_number_to">
-                      <input type="text" hidden id="route_to" name="street_name_to">
-                      <input type="text" hidden id="locality_to" name="toCity">
-                      <input type="text" hidden id="postal_code_to" name="toZip">
-                      <input type="text" hidden id="to-street" class="street_to" name="toStreet">
                       <input type="text" hidden id="leadgen_landing" name="landing">
                     </div>
                 </form>
+                <div class="succes-block">
+                  <div class="succes-block__inner">
+                    <div class="succes-block__wrapper">
+                      <img src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/bg-success.png" alt="succes">
+                      <span>Fertig! Ihr persönlicher Umzugsberater wird sich in Kürze mit Ihnen in Verbindung setzen.</span>
+                    </div>
+                  </div>
+                </div>
                 <ul class="leadgen__list">
                     <li class="leadgen__list-item">
                         <div class="leadgen__trusted">
@@ -3849,6 +3842,91 @@ let leadgen_holidays = {
                 <p class="leadgen__info">Vos données ne seront pas transmises à des tiers. Votre conseiller personnel en déménagement vous contactera sous peu pour vous présenter notre offre en détail.</p>
             </div>`;
         }
+
+      renderFRV4 () {
+        this.el.innerHTML = `
+              <div class="leadgen__container">
+                <strong class="leadgen__title">Conseils d'experts gratuits. <div><strong class="leadgen__title--error">Une erreur s'est produite. Veuillez réessayer.</strong></div></strong>
+                <form class="leadgen__form js-leadgen-validation" action="#" method="POST" onkeypress="return event.keyCode != 13;">
+                    <div class="leadgen__form-wrapper">
+                        <div class="leadgen__form-container leadgen__form-container--date">
+                            <div class="leadgen__form-row">
+                <span class="leadgen__form-holder">
+                    <span class="leadgen-icon-calendar"></span>
+                </span>
+                                <input id="js-leadgen-datepicker" name="date" readonly data-callModal="true" data-validaton="leadgen-input-date" autocomplete="off" type="text" class='leadgen__form-input' placeholder='Umzugsdatum'>
+                                <i class="leadgen__form-focus"></i>
+                                <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                            </div>
+                            <div class="leadgen__datepicker-holder"></div>
+                        </div>
+                        <div class="leadgen__form-container leadgen__form-container--time">
+                            <div class="leadgen__form-row">
+                <span class="leadgen__form-holder">
+                    <span class="leadgen-icon-clock"></span>
+                </span>
+                                <input type="text" id="leadgen_time" readonly data-validaton="leadgen-input-time" name="time" class='leadgen__form-input' placeholder='Time'>
+                                <i class="leadgen__form-focus"></i>
+                                <i class="leadgen__form-valid leadgen-icon-validation"></i>
+                                <div id="timepicker-container"></div>
+                                <div class="leadgen__form-error">Veuillez svp entrer votre temps</div>
+                            </div>
+                        </div>
+                        <div class="leadgen__form-btn-holder">
+                            <button type="submit" class="leadgen__form-btn js-leadgen-submit">
+                                Demander un rappel
+                                <div class="leadgen__form-spinner">
+                                    <div class="leadgen__form-bounce1"></div>
+                                    <div class="leadgen__form-bounce2"></div>
+                                    <div class="leadgen__form-bounce3"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="leadgen-hidden-input">
+                      <input type="text" hidden id="leadgen_landing" name="landing">
+                    </div>
+                </form>
+                <div class="succes-block">
+                  <div class="succes-block__inner">
+                    <div class="succes-block__wrapper">
+                      <img src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/bg-success.png" alt="succes">
+                      <span>Terminé ! Merci, votre conseiller personnel vous contactera sous peu.</span>
+                    </div>
+                  </div>
+                </div>
+                <ul class="leadgen__list">
+                    <li class="leadgen__list-item">
+                        <div class="leadgen__trusted">
+                            <img class="leadgen__trusted-img" src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/logo-trusted.png" width="35" height="35" alt="trusted">
+                            <div class="leadgen__trusted-info">
+                                <div class="leadgen__trusted-stars-holder">
+                                    <div class="leadgen__trusted-stars leadgen__trusted-stars--top">
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                    </div>
+                                    <div class="leadgen__trusted-stars">
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                        <i class="leadgen__trusted-star">★</i>
+                                    </div>
+                                </div>
+                                <span class="leadgen__trusted-text"><i>“Sehr gut”</i> <span>4.66/5.00</span></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="leadgen__list-item">
+                        <img src="https://s3.eu-central-1.amazonaws.com/movinga-leadgen/DE/final-widget/dist/images/logo-iam.png" width="52" height="25" alt="aim">
+                    </li>
+                </ul>
+                <p class="leadgen__info">Vos données ne seront pas transmises à des tiers. Votre conseiller personnel en déménagement vous contactera sous peu pour vous présenter notre offre en détail.</p>
+            </div>`;
+      }
     }
 
     // export
@@ -4005,6 +4083,16 @@ let leadgen_holidays = {
             this.submitBtn.classList.add('has-spinner');
         }
 
+        enableBtn() {
+            this.submitBtn.classList.remove('has-spinner');
+        }
+
+        errorMsg(show = true) {
+            const el = $('.leadgen__title--error');
+
+            show ? el.show() : el.hide();
+        }
+
         sendData(url, location) {
             let formData = $(this.el).serialize();
             
@@ -4019,6 +4107,45 @@ let leadgen_holidays = {
             window.location = location;
         }
 
+        patchData(long_sid) {
+            const url = 'https://customer-api.movinga.com/offers/';
+
+            const formData = $(this.el).serializeArray().reduce((obj, item) => {
+                obj[item.name] = item.value;
+                return obj;
+              }, {});
+
+            const data = {
+              contact: {
+                date: moment(formData.date, 'DD.MM.YYYY').format('YYYY-MM-DD'),
+                time: formData.time
+              }
+            };
+
+            const options = {
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              method: 'PATCH',
+              body: JSON.stringify(data)
+            };
+
+          this.errorMsg(false);
+
+          const apiRequest = fetch(`${url}${long_sid}`, options)
+                .then((res) => {
+                    if (res.status >= 404) {
+                        throw Error(res.statusText);
+                    }
+
+                $('.succes-block').show();
+            }).catch((e) => {
+              this.enableBtn();
+              this.errorMsg();
+          });
+        }
+
         formSubmit(e) {
             let customview = this.el.closest('.leadgen').dataset.version;
             e.preventDefault();
@@ -4031,6 +4158,11 @@ let leadgen_holidays = {
                     this.sendData('https://9yo0fqi28f.execute-api.eu-central-1.amazonaws.com/prod', 'http://umzugskostensparen.com/danke');
                 } else if(customview === 'v3') {
                     this.sendData('https://9yo0fqi28f.execute-api.eu-central-1.amazonaws.com/prod', 'http://umzugsfirmen24.com/danke');
+                } else if(customview === 'v4') {
+                      const params = new URLSearchParams(window.location.search);
+                      const long_sid = params.get('long_sid');
+
+                      this.patchData(long_sid);
                 } else {
                     this.formPost();
                 }

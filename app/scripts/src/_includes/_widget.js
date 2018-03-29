@@ -149,6 +149,16 @@
             this.submitBtn.classList.add('has-spinner');
         }
 
+        enableBtn() {
+            this.submitBtn.classList.remove('has-spinner');
+        }
+
+        errorMsg(show = true) {
+            const el = $('.leadgen__title--error');
+
+            show ? el.show() : el.hide();
+        }
+
         sendData(url, location) {
             let formData = $(this.el).serialize();
             
@@ -163,6 +173,45 @@
             window.location = location;
         }
 
+        patchData(long_sid) {
+            const url = 'https://customer-api.movinga.com/offers/';
+
+            const formData = $(this.el).serializeArray().reduce((obj, item) => {
+                obj[item.name] = item.value;
+                return obj;
+              }, {});
+
+            const data = {
+              contact: {
+                date: moment(formData.date, 'DD.MM.YYYY').format('YYYY-MM-DD'),
+                time: formData.time
+              }
+            };
+
+            const options = {
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              method: 'PATCH',
+              body: JSON.stringify(data)
+            };
+
+          this.errorMsg(false);
+
+          const apiRequest = fetch(`${url}${long_sid}`, options)
+                .then((res) => {
+                    if (res.status >= 404) {
+                        throw Error(res.statusText);
+                    }
+
+                $('.succes-block').show();
+            }).catch((e) => {
+              this.enableBtn();
+              this.errorMsg();
+          });
+        }
+
         formSubmit(e) {
             let customview = this.el.closest('.leadgen').dataset.version;
             e.preventDefault();
@@ -175,6 +224,11 @@
                     this.sendData('https://9yo0fqi28f.execute-api.eu-central-1.amazonaws.com/prod', 'http://umzugskostensparen.com/danke');
                 } else if(customview === 'v3') {
                     this.sendData('https://9yo0fqi28f.execute-api.eu-central-1.amazonaws.com/prod', 'http://umzugsfirmen24.com/danke');
+                } else if(customview === 'v4') {
+                      const params = new URLSearchParams(window.location.search);
+                      const long_sid = params.get('long_sid');
+
+                      this.patchData(long_sid);
                 } else {
                     this.formPost();
                 }
